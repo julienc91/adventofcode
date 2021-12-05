@@ -35,8 +35,3 @@ def main2() -> int:
     except EOFError:
         return x * y
     raise RuntimeError
-
-
-if __name__ == "__main__":
-    result = main2()
-    print(result)

@@ -67,8 +67,3 @@ def main2() -> int:
             co2_result = co2_filtered_values.pop()
             break
     return int(o2_result, 2) * int(co2_result, 2)
-
-
-if __name__ == "__main__":
-    result = main2()
-    print(result)
