@@ -71,8 +71,3 @@ def main2() -> int:
             return get_grid_score(last_won_grid, number)
         grids = remaining_grids
     raise RuntimeError
-
-
-if __name__ == "__main__":
-    result = main2()
-    print(result)

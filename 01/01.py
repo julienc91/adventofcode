@@ -1,4 +1,4 @@
-def main(window_size: int) -> int:
+def _main(window_size: int) -> int:
     result = 0
     previous_window = [int(input()) for _ in range(window_size)]
     try:
@@ -12,6 +12,9 @@ def main(window_size: int) -> int:
     raise RuntimeError
 
 
-if __name__ == "__main__":
-    result = main(window_size=3)
-    print(result)
+def main1() -> int:
+    return _main(1)
+
+
+def main2() -> int:
+    return _main(3)

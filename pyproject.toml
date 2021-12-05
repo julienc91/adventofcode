@@ -2,4 +2,5 @@
 profile = "black"
 
 [tool.mypy]
+exclude = "tests/"
 strict = true
