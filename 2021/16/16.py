@@ -107,7 +107,3 @@ def main2() -> int:
     buffer = init_buffer()
     packet = parse_packet(buffer)
     return packet.value
-
-
-if __name__ == "__main__":
-    main1()
