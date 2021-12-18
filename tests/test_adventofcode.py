@@ -24,7 +24,10 @@ EXPECTED_RESULTS = {
         (16, (938, 1495959086337)),
         (17, (7381, 3019)),
         (18, (3691, 4756)),
-    ]
+    ],
+    2015: [
+        (1, (74, 1795)),
+    ],
 }
 EXPECTED_RESULTS_WITH_YEAR = [
     (year, *result) for year in EXPECTED_RESULTS for result in EXPECTED_RESULTS[year]
