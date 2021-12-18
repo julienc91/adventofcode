@@ -28,6 +28,7 @@ EXPECTED_RESULTS = {
     2015: [
         (1, (74, 1795)),
         (2, (1606483, 3842356)),
+        (3, (2081, 2341)),
     ],
 }
 EXPECTED_RESULTS_WITH_YEAR = [
