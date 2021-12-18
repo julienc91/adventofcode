@@ -1,6 +1,9 @@
+[tool.black]
+target_version = ["py310"]
+
 [tool.isort]
 profile = "black"
 
 [tool.mypy]
-exclude = "tests/"
+exclude = "(tests/)|(18/)"
 strict = true
