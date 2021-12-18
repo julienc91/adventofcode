@@ -32,8 +32,11 @@ EXPECTED_RESULTS = {
         (4, (254575, 1038736)),
     ],
 }
-EXPECTED_RESULTS_WITH_YEAR = [
-    (year, *result) for year in EXPECTED_RESULTS for result in EXPECTED_RESULTS[year]
+
+TEST_PARAMETERS = [
+    pytest.param(year, f"{puzzle_id:02d}", result, id=f"{year}-{puzzle_id:02d}")
+    for year in EXPECTED_RESULTS
+    for puzzle_id, result in EXPECTED_RESULTS[year]
 ]
 
 
@@ -43,11 +46,10 @@ def run_test(year: int, puzzle_name: str, func_name: str) -> int:
     return getattr(module, func_name)()
 
 
-@pytest.mark.parametrize("year, puzzle_id, expected_result", EXPECTED_RESULTS_WITH_YEAR)
+@pytest.mark.parametrize("year, puzzle_name, expected_result", TEST_PARAMETERS)
 def test_puzzle(
-    monkeypatch, year: int, puzzle_id: int, expected_result: tuple[int, int]
+    monkeypatch, year: int, puzzle_name: str, expected_result: tuple[int, int]
 ) -> None:
-    puzzle_name = f"{puzzle_id:02d}"
     with open(os.path.join(str(year), puzzle_name, "input")) as f:
         data = f.read()
 
