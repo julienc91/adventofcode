@@ -72,7 +72,7 @@ TEST_PARAMETERS = [
 ]
 
 
-def run_test(year: int, puzzle_name: str, func_name: str) -> int:
+def run_test(year: int, puzzle_name: str, func_name: str) -> int | str:
     file_name = f"{year}.{puzzle_name}.{puzzle_name}"
     module = importlib.import_module(file_name)
     return getattr(module, func_name)()
@@ -80,7 +80,10 @@ def run_test(year: int, puzzle_name: str, func_name: str) -> int:
 
 @pytest.mark.parametrize("year, puzzle_name, expected_result", TEST_PARAMETERS)
 def test_puzzle(
-    monkeypatch, year: int, puzzle_name: str, expected_result: tuple[int, int]
+    monkeypatch,
+    year: int,
+    puzzle_name: str,
+    expected_result: tuple[int | str, int | str],
 ) -> None:
     with open(os.path.join(str(year), puzzle_name, "input")) as f:
         data = f.read()
