@@ -37,6 +37,7 @@ EXPECTED_RESULTS = {
         (5, ("c6697b55", "8c35d1ab")),
         (6, ("ikerpcty", "uwpfaqrq")),
         (7, (115, 231)),
+        (8, (106, "CFLELOYFCS")),
     ],
     2015: [
         (1, (74, 1795)),
