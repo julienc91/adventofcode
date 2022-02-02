@@ -50,7 +50,7 @@ def main2() -> int:
     max_y = get_max_y(y_range)
     count = 0
     for x in range(0, x_range[1] + 1):
-        for y in range(y_range[0], 2 * int(max_y ** 0.5)):
+        for y in range(y_range[0], 2 * int(max_y**0.5)):
             if is_target_hit(x, y, x_range, y_range):
                 count += 1
     return count

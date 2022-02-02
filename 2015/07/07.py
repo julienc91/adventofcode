@@ -23,7 +23,7 @@ def update_circuit(instruction: str, circuit: dict[str, int]) -> None:
     if "NOT" in instruction:
         _, v, _, wire = instruction.split()
         value = get_value_from_wire_or_raw_signal(v, circuit)
-        circuit[wire] = (2 ** 16) - value - 1
+        circuit[wire] = (2**16) - value - 1
 
     elif "AND" in instruction or "OR" in instruction or "SHIFT" in instruction:
         v1, operator, v2, _, wire = instruction.split()
