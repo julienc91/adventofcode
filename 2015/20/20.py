@@ -18,7 +18,7 @@ def main1() -> int:
     threshold = int(input())
     threshold = math.ceil(threshold // 10)
 
-    n = int(threshold ** 0.5) * 2
+    n = int(threshold**0.5) * 2
     n = 776000  # tests are too long to run otherwise
     while sum(get_divisors(n)) < threshold:
         n += 1
@@ -29,7 +29,7 @@ def main2() -> int:
     threshold = int(input())
     threshold = math.ceil(threshold // 11)
 
-    n = int(threshold ** 0.5) * 2
+    n = int(threshold**0.5) * 2
     n = 786000  # tests are too long to run otherwise
     max_per_divisor = 50
     while True:
