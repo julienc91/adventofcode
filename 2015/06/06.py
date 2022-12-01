@@ -1,6 +1,6 @@
 import re
 from collections import defaultdict
-from typing import Callable, Iterator
+from collections.abc import Callable, Iterator
 
 instruction_format = re.compile(
     r"(turn on|turn off|toggle) (\d+),(\d+) through (\d+),(\d+)"

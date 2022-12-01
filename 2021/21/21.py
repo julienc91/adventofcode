@@ -1,4 +1,4 @@
-from typing import Iterator
+from collections.abc import Iterator
 
 
 def parse_starting_points() -> tuple[int, int]:

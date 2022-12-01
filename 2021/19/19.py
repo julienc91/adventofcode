@@ -1,8 +1,8 @@
 import itertools
 from collections import defaultdict
+from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache, cached_property
-from typing import Callable
 
 
 @dataclass

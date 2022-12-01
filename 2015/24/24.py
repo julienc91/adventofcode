@@ -1,6 +1,6 @@
 import itertools
 import math
-from typing import Iterator
+from collections.abc import Iterator
 
 
 def parse_weights() -> list[int]:

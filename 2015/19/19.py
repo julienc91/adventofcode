@@ -1,7 +1,7 @@
 import random
 import re
 from collections import defaultdict
-from typing import Iterator
+from collections.abc import Iterator
 
 
 def parse_transformations() -> dict[str, list[str]]:

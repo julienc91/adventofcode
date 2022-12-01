@@ -1,4 +1,4 @@
-from typing import Iterator, Optional
+from collections.abc import Iterator
 
 pairs = {")": "(", "]": "[", "}": "{", ">": "<"}
 
@@ -11,7 +11,7 @@ def parse_input() -> Iterator[str]:
         pass
 
 
-def build_stack(line: str) -> tuple[Optional[str], list[str]]:
+def build_stack(line: str) -> tuple[str | None, list[str]]:
     stack = []
     for c in line:
         if c in "([{<":

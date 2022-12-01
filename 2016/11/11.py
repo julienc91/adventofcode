@@ -1,8 +1,8 @@
 import itertools
 import re
 from collections import deque
+from collections.abc import Iterator
 from dataclasses import dataclass
-from typing import Iterator
 
 
 @dataclass

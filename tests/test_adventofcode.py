@@ -1,10 +1,12 @@
 import importlib
 import io
 import os
+from collections.abc import Callable
 
 import pytest
+from _pytest.monkeypatch import MonkeyPatch
 
-EXPECTED_RESULTS = {
+EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
     2022: [
         (1, (67633, 199628)),
     ],
@@ -102,12 +104,13 @@ TEST_PARAMETERS = [
 def run_test(year: int, puzzle_name: str, func_name: str) -> int | str:
     file_name = f"{year}.{puzzle_name}.{puzzle_name}"
     module = importlib.import_module(file_name)
-    return getattr(module, func_name)()
+    func: Callable[[], int | str] = getattr(module, func_name)
+    return func()
 
 
 @pytest.mark.parametrize("year, puzzle_name, expected_result", TEST_PARAMETERS)
 def test_puzzle(
-    monkeypatch,
+    monkeypatch: MonkeyPatch,
     year: int,
     puzzle_name: str,
     expected_result: tuple[int | str, int | str],

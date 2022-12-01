@@ -1,7 +1,7 @@
 import re
+from collections.abc import Iterator
 from functools import cache
 from hashlib import md5
-from typing import Iterator, Type
 
 
 class Generator1:
@@ -69,7 +69,7 @@ class Generator2(Generator1):
         return res
 
 
-def _main(generator_class: Type[Generator1 | Generator2]) -> int:
+def _main(generator_class: type[Generator1 | Generator2]) -> int:
     salt = input().strip()
     last_key_index = -1
     generator = generator_class(salt)

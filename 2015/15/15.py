@@ -1,6 +1,6 @@
 import math
+from collections.abc import Callable, Iterator
 from dataclasses import dataclass
-from typing import Callable, Iterator
 
 
 @dataclass

@@ -24,6 +24,8 @@ def add_carry(n: Number, carry: int, left: bool) -> Number:
                 return [add_carry(a, carry, left), b]
             else:
                 return [a, add_carry(b, carry, left)]
+        case _:
+            raise ValueError()
 
 
 def explode(n: Number) -> tuple[bool, Number]:
@@ -89,6 +91,8 @@ def magnitude(n: Number) -> int:
             return a
         case [a, b]:
             return 3 * magnitude(a) + 2 * magnitude(b)
+        case _:
+            raise ValueError()
 
 
 def main1() -> int:

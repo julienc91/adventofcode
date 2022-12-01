@@ -1,4 +1,4 @@
-from typing import Callable
+from collections.abc import Callable
 
 
 def parse_instructions() -> list[str]:
