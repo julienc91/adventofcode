@@ -1,4 +1,4 @@
-from typing import Iterator
+from collections.abc import Iterator
 
 
 def parse_input() -> Iterator[tuple[int, int, int]]:

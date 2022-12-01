@@ -1,10 +1,8 @@
 from collections import defaultdict
-from typing import Generator
+from collections.abc import Iterator
 
 
-def parse_coordinates() -> Generator[
-    tuple[tuple[int, int], tuple[int, int]], None, None
-]:
+def parse_coordinates() -> Iterator[tuple[tuple[int, int], tuple[int, int]]]:
     try:
         while True:
             line = input()

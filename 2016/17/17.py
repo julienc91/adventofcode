@@ -1,6 +1,6 @@
 import hashlib
 from collections import deque
-from typing import Iterator
+from collections.abc import Iterator
 
 
 def get_available_neighbours(

@@ -1,5 +1,5 @@
 from collections import defaultdict
-from typing import Iterator
+from collections.abc import Iterator
 
 
 def parse_instructions() -> Iterator[str]:

@@ -1,4 +1,4 @@
-from typing import Callable, Iterator
+from collections.abc import Callable, Iterator
 
 
 def _main(parse_lengths: Callable[[], Iterator[tuple[int, int, int]]]) -> int:

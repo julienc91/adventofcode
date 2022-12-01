@@ -1,5 +1,5 @@
 import re
-from typing import Iterator
+from collections.abc import Iterator
 
 Cuboid = tuple[int, int, int, int, int, int]
 
