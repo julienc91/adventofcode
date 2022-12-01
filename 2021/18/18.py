@@ -35,6 +35,8 @@ def explode(n: Number) -> tuple[bool, Number]:
                 return False, n, 0, 0
             case [a, b]:
                 if depth >= 4:
+                    if not isinstance(a, int) or not isinstance(b, int):
+                        raise ValueError()
                     return True, 0, a, b
 
                 has_exploded, new_a, left, right = explode_(a, depth + 1)
@@ -49,6 +51,8 @@ def explode(n: Number) -> tuple[bool, Number]:
                         a = add_carry(a, left, False)
                     return True, [a, new_b], 0, right
                 return False, [a, b], 0, 0
+            case _:
+                raise ValueError()
 
     exploded, res, _, _ = explode_(n, 0)
     return exploded, res
@@ -72,7 +76,7 @@ def split(n: Number) -> tuple[bool, Number]:
 
 
 def add(a: Number, b: Number) -> Number:
-    res = [a, b]
+    res: Number = [a, b]
     while True:
         has_exploded, res = explode(res)
         if has_exploded:
