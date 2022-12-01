@@ -5,5 +5,5 @@ target_version = ["py311"]
 profile = "black"
 
 [tool.mypy]
-exclude = "tests/"
 strict = true
+packages = ["2015", "2016", "2017", "2021", "2022"]
