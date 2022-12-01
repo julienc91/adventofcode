@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-dev.txt
       - name: Run test suite
-        run: pytest -v .
+        run: pytest -n auto -W error -v .
   lint:
     runs-on: ubuntu-latest
     steps:
