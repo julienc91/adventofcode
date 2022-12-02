@@ -9,6 +9,7 @@ from _pytest.monkeypatch import MonkeyPatch
 EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
     2022: [
         (1, (67633, 199628)),
+        (2, (10624, 14060)),
     ],
     2021: [
         (1, (1557, 1608)),
