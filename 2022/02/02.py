@@ -2,29 +2,21 @@ from enum import Enum
 
 
 class Shape(Enum):
-    ROCK = "R"
-    PAPER = "P"
-    SCISSORS = "S"
+    ROCK = 0
+    PAPER = 1
+    SCISSORS = 2
 
     @property
     def base_point(self) -> int:
-        return {Shape.ROCK: 1, Shape.PAPER: 2, Shape.SCISSORS: 3}[self]
+        return self.value + 1
 
     @property
     def wins_against(self) -> "Shape":
-        return {
-            Shape.ROCK: Shape.SCISSORS,
-            Shape.PAPER: Shape.ROCK,
-            Shape.SCISSORS: Shape.PAPER,
-        }[self]
+        return Shape((self.value - 1) % 3)  # Props to @Atlante45!
 
     @property
     def loses_against(self) -> "Shape":
-        return {
-            Shape.ROCK: Shape.PAPER,
-            Shape.PAPER: Shape.SCISSORS,
-            Shape.SCISSORS: Shape.ROCK,
-        }[self]
+        return Shape((self.value + 1) % 3)
 
     def is_winner(self, opponent: "Shape") -> bool:
         return self.wins_against == opponent
