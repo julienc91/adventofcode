@@ -10,6 +10,7 @@ EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
     2022: [
         (1, (67633, 199628)),
         (2, (10624, 14060)),
+        (3, (7817, 2444)),
     ],
     2021: [
         (1, (1557, 1608)),
