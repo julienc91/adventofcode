@@ -2,3 +2,7 @@ mypy
 pre-commit
 pytest
 pytest-xdist
+types-appdirs
+types-beautifulsoup4
+types-click
+types-requests

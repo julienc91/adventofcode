@@ -1,10 +1,9 @@
 import importlib
-import io
-import os
 from collections.abc import Callable
 
 import pytest
-from _pytest.monkeypatch import MonkeyPatch
+
+from cli.utils.puzzle import run_puzzle_func
 
 EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
     2022: [
@@ -100,7 +99,7 @@ EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
 }
 
 TEST_PARAMETERS = [
-    pytest.param(year, f"{puzzle_id:02d}", result, id=f"{year}-{puzzle_id:02d}")
+    pytest.param(year, puzzle_id, result, id=f"{year}-{puzzle_id:02d}")
     for year in EXPECTED_RESULTS
     for puzzle_id, result in EXPECTED_RESULTS[year]
 ]
@@ -115,18 +114,12 @@ def run_test(year: int, puzzle_name: str, func_name: str) -> int | str:
 
 @pytest.mark.parametrize("year, puzzle_name, expected_result", TEST_PARAMETERS)
 def test_puzzle(
-    monkeypatch: MonkeyPatch,
     year: int,
-    puzzle_name: str,
+    puzzle_name: int,
     expected_result: tuple[int | str, int | str],
 ) -> None:
-    with open(os.path.join(str(year), puzzle_name, "input")) as f:
-        data = f.read()
-
-    monkeypatch.setattr("sys.stdin", io.StringIO(data))
-    result = run_test(year, puzzle_name, "main1")
+    result = run_puzzle_func(year, puzzle_name, "main1")
     assert result == expected_result[0]
 
-    monkeypatch.setattr("sys.stdin", io.StringIO(data))
-    result = run_test(year, puzzle_name, "main2")
+    result = run_puzzle_func(year, puzzle_name, "main2")
     assert result == expected_result[1]

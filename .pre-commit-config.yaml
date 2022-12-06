@@ -16,6 +16,12 @@ repos:
     hooks:
     -   id: mypy
         pass_filenames: false
+        additional_dependencies:
+            - pytest
+            - types-appdirs
+            - types-beautifulsoup4
+            - types-click
+            - types-requests
 -   repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:
