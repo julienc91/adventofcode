@@ -16,15 +16,18 @@ def puzzle() -> None:
 
 def validate_date(day: int | None, year: int | None) -> date:
     today = date.today()
-    if day is None:
-        day = today.day
-    elif not 1 <= day <= 25:
-        raise click.BadParameter("Invalid day")
 
     if year is None:
         year = today.year
     elif not 2015 <= year <= today.year:
         raise click.BadParameter("Invalid year")
+    elif year != today.year and day is None:
+        raise click.BadParameter("Invalid day")
+
+    if day is None:
+        day = today.day
+    elif not 1 <= day <= 25:
+        raise click.BadParameter("Invalid day")
 
     if year == today.year and day > today.day:
         raise click.BadParameter("Invalid day")
@@ -62,6 +65,23 @@ def init(day: int | None, year: int | None) -> None:
     except Exception:
         directory.rmdir()
         raise
+
+
+@puzzle.command()
+@click.option("--day", default=None, type=int)
+@click.option("--year", default=None, type=int)
+@click.option("--part", type=int)
+def submit(day: int | None, year: int | None, part: int) -> None:
+    puzzle_date = validate_date(day, year)
+    if part not in {1, 2}:
+        raise click.BadParameter("Invalid part")
+
+    # Always run part1, for some puzzles it's needed to run both parts consecutively
+    result = run_puzzle_func(puzzle_date.year, puzzle_date.day, "main1")
+    if part == 2:
+        result = run_puzzle_func(puzzle_date.year, puzzle_date.day, "main2")
+    _, text = aoc_client.puzzle.submit(puzzle_date.year, puzzle_date.day, part, result)
+    click.echo(text)
 
 
 PUZZLE_TEMPLATE = """def main1() -> int:
