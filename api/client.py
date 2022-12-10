@@ -54,5 +54,18 @@ class AOCClient:
             raise AuthenticationException()
         return response.text
 
+    def post_html(self, path: str, data: dict[str, str]) -> BeautifulSoup:
+        response = requests.post(
+            f"{self.BASE_URL}/{path.lstrip('/')}", cookies=self._cookies, data=data
+        )
+        if response.status_code != 200:
+            raise AuthenticationException()
+
+        page = BeautifulSoup(response.content, features="html.parser")
+        username_container = page.select("header .user")[0]
+        if not username_container:
+            raise AuthenticationException()
+        return page
+
 
 aoc_client = AOCClient()
