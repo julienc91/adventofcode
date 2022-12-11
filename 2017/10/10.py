@@ -53,5 +53,4 @@ def main2() -> str:
         block = data[i : i + block_size]
         block_reduction = reduce(lambda a, b: a ^ b, block)
         dense_hash += (hex(block_reduction) + "0")[2:4]
-        print(dense_hash)
     return dense_hash
