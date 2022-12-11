@@ -108,5 +108,4 @@ def main2() -> str:
     instructions = parse_instructions()[::-1]
     for instruction in instructions:
         key = apply_reverse_instruction(key, instruction)
-        print(instruction, "\n", "".join(key))
     return "".join(key)
