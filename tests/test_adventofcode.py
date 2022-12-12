@@ -18,6 +18,7 @@ EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
         (9, (6357, 2627)),
         (10, (15020, "EFUGLPAP")),
         (11, (50172, 11614682178)),
+        (12, (528, 522)),
     ],
     2021: [
         (1, (1557, 1608)),
