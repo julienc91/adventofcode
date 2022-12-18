@@ -142,7 +142,7 @@ def main2() -> int:
         path1, score1 = all_paths[i]
         for j in range(i + 1, len(all_paths)):
             path2, score2 = all_paths[j]
-            if path1 & path2:
+            if not path1.isdisjoint(path2):
                 # The paths are overlapping, this cannot be a valid solution
                 continue
             if score1 + score2 > best_score:

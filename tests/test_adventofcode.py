@@ -2,6 +2,7 @@ import importlib
 from collections.abc import Callable
 
 import pytest
+from typing import Any
 
 from cli.utils.puzzle import run_puzzle_func
 
@@ -146,3 +147,12 @@ def test_puzzle(
 
     result = run_puzzle_func(year, puzzle_name, "main2")
     assert result == expected_result[1]
+
+
+@pytest.mark.parametrize("year, puzzle_name, expected_result", TEST_PARAMETERS)
+@pytest.mark.parametrize("part", [1, 2])
+@pytest.mark.benchmark
+def test_benchmark(
+    benchmark: Any, year: int, puzzle_name: str, expected_result: str, part: int
+) -> None:
+    benchmark(run_puzzle_func, year, puzzle_name, f"main{part}")
