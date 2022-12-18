@@ -52,5 +52,5 @@ def main2() -> str:
     for i in range(0, data_size, block_size):
         block = data[i : i + block_size]
         block_reduction = reduce(lambda a, b: a ^ b, block)
-        dense_hash += (hex(block_reduction) + "0")[2:4]
+        dense_hash += "{:02x}".format(block_reduction)
     return dense_hash

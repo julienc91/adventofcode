@@ -1,8 +1,8 @@
 import importlib
 from collections.abc import Callable
+from typing import Any
 
 import pytest
-from typing import Any
 
 from cli.utils.puzzle import run_puzzle_func
 
@@ -65,6 +65,7 @@ EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
         (11, (747, 1544)),
         (12, (288, 211)),
         (13, (1528, 3896406)),
+        (14, (8230, 1103)),
     ],
     2016: [
         (1, (230, 154)),
