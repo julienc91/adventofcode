@@ -8,9 +8,9 @@ class Node:
     links: list["Node"] = field(default_factory=list)
 
 
-def parse_input() -> tuple[
-    dict[tuple[int, int], Node], tuple[int, int], tuple[int, int]
-]:
+def parse_input() -> (
+    tuple[dict[tuple[int, int], Node], tuple[int, int], tuple[int, int]]
+):
     nodes_by_id: dict[tuple[int, int], Node] = {}
     start = (0, 0)
     finish = (0, 0)
