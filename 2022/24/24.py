@@ -55,7 +55,7 @@ class Grid:
         return new_blizzards, {point for point, _ in new_blizzards}
 
     def move(self, start: Point, end: Point) -> int:
-        queue = [(start, 0)]
+        queue: list[tuple[Point, int]] = [(start, 0)]
         visited = set()
         while queue:
             (x, y), count = queue.pop(0)
@@ -69,7 +69,7 @@ class Grid:
                 if (
                     (y2 <= 0 or y2 >= self.height - 1)
                     or (x2 <= 0 or x2 >= self.width - 1)
-                ) and (x2, y2,) not in {start, end}:
+                ) and (x2, y2) not in {start, end}:
                     continue
                 if (x2, y2) in denied_positions:
                     continue

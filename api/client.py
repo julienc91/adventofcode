@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import appdirs
-import requests
+import httpx
 from bs4 import BeautifulSoup
 
 from .exceptions import AuthenticationException, NotLoggedInException
@@ -34,7 +34,7 @@ class AOCClient:
     def get_html(
         self, path: str, cookies: dict[str, str] | None = None
     ) -> BeautifulSoup:
-        response = requests.get(
+        response = httpx.get(
             f"{self.BASE_URL}/{path.lstrip('/')}", cookies=cookies or self._cookies
         )
         if response.status_code != 200:
@@ -47,7 +47,7 @@ class AOCClient:
         return page
 
     def get_text(self, path: str) -> str:
-        response = requests.get(
+        response = httpx.get(
             f"{self.BASE_URL}/{path.lstrip('/')}", cookies=self._cookies
         )
         if response.status_code != 200:
@@ -55,7 +55,7 @@ class AOCClient:
         return response.text
 
     def post_html(self, path: str, data: dict[str, str]) -> BeautifulSoup:
-        response = requests.post(
+        response = httpx.post(
             f"{self.BASE_URL}/{path.lstrip('/')}", cookies=self._cookies, data=data
         )
         if response.status_code != 200:

@@ -18,8 +18,8 @@ def move_tail(head: tuple[int, int], tail: tuple[int, int]) -> tuple[int, int]:
 
 
 def _main(rope_length: int) -> int:
-    rope = [(0, 0) for _ in range(rope_length)]
-    visited = {rope[-1]}
+    rope: list[tuple[int, int]] = [(0, 0) for _ in range(rope_length)]
+    visited: set[tuple[int, int]] = {rope[-1]}
     try:
         while line := input().strip():
             xh, yh = rope[0]

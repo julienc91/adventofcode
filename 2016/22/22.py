@@ -26,7 +26,7 @@ class Node:
 
 
 def parse_nodes() -> list[Node]:
-    input(), input()
+    _ = input(), input()
     res: list[Node] = []
     try:
         while line := input().strip():
