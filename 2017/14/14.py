@@ -1,16 +1,13 @@
-import typing
 from functools import cache, reduce
 
 
 # Copied from 2017-10
 class CircularList(list[int]):
-    @typing.no_type_check
     def __getitem__(self, index: int | slice) -> int | list[int]:
         if isinstance(index, int):
             return super().__getitem__(index % len(self))
-        return [self.__getitem__(i) for i in range(index.start, index.stop)]
+        return [self.__getitem__(i) for i in range(index.start, index.stop)]  # type: ignore
 
-    @typing.no_type_check
     def __setitem__(self, index: int, value: int) -> None:
         return super().__setitem__(index % len(self), value)
 
@@ -20,7 +17,7 @@ def dense_hash(data: list[int]) -> str:
     block_size = 16
     result = ""
     for i in range(0, data_size, block_size):
-        block_reduction = reduce(lambda a, b: a ^ b, data[i : i + block_size])
+        block_reduction: int = reduce(lambda a, b: a ^ b, data[i : i + block_size])  # type: ignore
         result += "{:02x}".format(block_reduction)
     return result
 
@@ -35,7 +32,7 @@ def hash_knot(input_: str) -> str:
 
     for _ in range(total_rounds):
         for length in lengths:
-            data_to_reverse = data[index : index + length][::-1]
+            data_to_reverse: list[int] = data[index : index + length][::-1]  # type: ignore
             for i, c in enumerate(data_to_reverse):
                 data[index + i] = c
 

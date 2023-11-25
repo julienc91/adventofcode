@@ -43,7 +43,7 @@ def main1() -> int:
 
 def main2() -> int:
     x, y = 0, 0
-    visited = {(x, y)}
+    visited: set[tuple[int, int]] = {(x, y)}
     for direction, count in parse_instructions():
         coeff_x, coeff_y = direction.value
         for step in range(count):

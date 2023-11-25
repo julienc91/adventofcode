@@ -46,7 +46,7 @@ def parse_input() -> (
 
 
 def shortest_path(root_node: Node, target_node: Node) -> int:
-    queue = [(0, root_node)]
+    queue: list[tuple[int, Node]] = [(0, root_node)]
     visited = set()
     while queue:
         cost, node = queue.pop(0)

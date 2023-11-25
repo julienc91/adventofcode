@@ -20,7 +20,7 @@ def _main() -> Iterator[str]:
     target = (3, 3)
     key = input().strip()
 
-    stack = deque([(x, y, "")])
+    stack: deque[tuple[int, int, str]] = deque([(x, y, "")])
     while stack:
         x, y, path = stack.popleft()
         if (x, y) == target:

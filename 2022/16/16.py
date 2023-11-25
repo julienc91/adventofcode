@@ -48,7 +48,7 @@ def parse_input() -> dict[str, Valve]:
 
 @cache
 def get_distance(start_valve: Valve, target_valve: Valve) -> int:
-    queue = [(0, start_valve)]
+    queue: list[tuple[int, Valve]] = [(0, start_valve)]
     visited: set[Valve] = set()
     while queue:
         cost, valve = queue.pop(0)
