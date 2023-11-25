@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import os
 import appdirs
 import httpx
 from bs4 import BeautifulSoup
@@ -26,25 +26,26 @@ class AOCClient:
         return {"session": data}
 
     def set_cookie(self, cookie: str) -> None:
-        self.get_html("/", {"session": cookie})
+        self.check_auth({"session": cookie})
 
         self.CACHE_DIRECTORY.mkdir(parents=True, exist_ok=True)
         self.CACHE_FILE.write_text(cookie)
 
-    def get_html(
-        self, path: str, cookies: dict[str, str] | None = None
-    ) -> BeautifulSoup:
-        response = httpx.get(
-            f"{self.BASE_URL}/{path.lstrip('/')}", cookies=cookies or self._cookies
-        )
+    def unset_cookie(self) -> None:
+        try:
+            os.remove(self.CACHE_FILE)
+        except FileNotFoundError:
+            pass
+
+    def check_auth(self, cookies: dict[str, str] | None = None) -> None:
+        response = httpx.get(f"{self.BASE_URL}/", cookies=cookies or self._cookies)
         if response.status_code != 200:
             raise AuthenticationException()
 
         page = BeautifulSoup(response.content, features="html.parser")
-        username_container = page.select("header .user")[0]
+        username_container = page.select("header .user")
         if not username_container:
             raise AuthenticationException()
-        return page
 
     def get_text(self, path: str) -> str:
         response = httpx.get(
