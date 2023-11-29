@@ -1,11 +1,4 @@
-def parse_instructions() -> list[str]:
-    res: list[str] = []
-    try:
-        while line := input().strip():
-            res.append(line)
-    except EOFError:
-        pass
-    return res
+from utils.parsing import parse_input
 
 
 def swap_position(key: list[str], a: int, b: int) -> list[str]:
@@ -97,7 +90,7 @@ def apply_reverse_instruction(key: list[str], instruction: str) -> list[str]:
 
 def main1() -> str:
     key = list("abcdefgh")
-    instructions = parse_instructions()
+    instructions = list(parse_input())
     for instruction in instructions:
         key = apply_instruction(key, instruction)
     return "".join(key)
@@ -105,7 +98,7 @@ def main1() -> str:
 
 def main2() -> str:
     key = list("fbgdceah")
-    instructions = parse_instructions()[::-1]
+    instructions = list(parse_input())[::-1]
     for instruction in instructions:
         key = apply_reverse_instruction(key, instruction)
     return "".join(key)

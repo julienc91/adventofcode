@@ -4,6 +4,8 @@ from dataclasses import dataclass
 from enum import Enum
 from functools import cached_property
 
+from utils.parsing import parse_input
+
 
 class Resource(Enum):
     ORE = 0
@@ -30,7 +32,7 @@ class Blueprint:
         return hash(self.id)
 
 
-def parse_input() -> list[Blueprint]:
+def parse_blueprints() -> list[Blueprint]:
     regex = re.compile(
         r"Blueprint (\d+): "
         r"Each ore robot costs (\d+) ore. "
@@ -39,28 +41,25 @@ def parse_input() -> list[Blueprint]:
         r"Each geode robot costs (\d+) ore and (\d+) obsidian."
     )
     blueprints: list[Blueprint] = []
-    try:
-        while line := input().strip():
-            match = regex.match(line)
-            if match is None:
-                break
+    for line in parse_input():
+        match = regex.match(line)
+        if match is None:
+            break
 
-            groups = match.groups()
-            costs = {
-                Resource.ORE: [(Resource.ORE, int(groups[1]))],
-                Resource.CLAY: [(Resource.ORE, int(groups[2]))],
-                Resource.OBSIDIAN: [
-                    (Resource.ORE, int(groups[3])),
-                    (Resource.CLAY, int(groups[4])),
-                ],
-                Resource.GEODE: [
-                    (Resource.ORE, int(groups[5])),
-                    (Resource.OBSIDIAN, int(groups[6])),
-                ],
-            }
-            blueprints.append(Blueprint(id=int(groups[0]), costs=costs))
-    except EOFError:
-        pass
+        groups = match.groups()
+        costs = {
+            Resource.ORE: [(Resource.ORE, int(groups[1]))],
+            Resource.CLAY: [(Resource.ORE, int(groups[2]))],
+            Resource.OBSIDIAN: [
+                (Resource.ORE, int(groups[3])),
+                (Resource.CLAY, int(groups[4])),
+            ],
+            Resource.GEODE: [
+                (Resource.ORE, int(groups[5])),
+                (Resource.OBSIDIAN, int(groups[6])),
+            ],
+        }
+        blueprints.append(Blueprint(id=int(groups[0]), costs=costs))
     return blueprints
 
 
@@ -186,7 +185,7 @@ class Factory:
 
 
 def main1() -> int:
-    blueprints = parse_input()
+    blueprints = parse_blueprints()
     countdown = 24
     total = 0
     for blueprint in blueprints:
@@ -197,7 +196,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    blueprints = parse_input()[:3]
+    blueprints = parse_blueprints()[:3]
     countdown = 32
     total = 1
     for blueprint in blueprints:

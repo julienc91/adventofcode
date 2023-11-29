@@ -1,17 +1,16 @@
 import math
 from ast import literal_eval
 
+from utils.parsing import parse_input
+
 Number = int | list["Number"]
 
 
-def parse_input() -> list[Number]:
+def parse_numbers() -> list[Number]:
     res = []
-    try:
-        while line := input().strip():
-            number = literal_eval(line)
-            res.append(number)
-    except EOFError:
-        pass
+    for line in parse_input():
+        number = literal_eval(line)
+        res.append(number)
     return res
 
 
@@ -100,7 +99,7 @@ def magnitude(n: Number) -> int:
 
 
 def main1() -> int:
-    numbers = parse_input()
+    numbers = parse_numbers()
     res = numbers.pop(0)
     while numbers:
         next_number = numbers.pop(0)
@@ -110,7 +109,7 @@ def main1() -> int:
 
 def main2() -> int:
     max_magnitude = 0
-    numbers = parse_input()
+    numbers = parse_numbers()
     for i, n1 in enumerate(numbers):
         for j, n2 in enumerate(numbers):
             if i == j:

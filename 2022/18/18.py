@@ -1,19 +1,18 @@
+from utils.parsing import parse_input
+
 Voxel = tuple[int, int, int]
 
 
-def parse_input() -> set[Voxel]:
+def parse_voxels() -> set[Voxel]:
     res: set[Voxel] = set()
-    try:
-        while line := input().strip():
-            x, y, z = line.split(",")
-            res.add((int(x), int(y), int(z)))
-    except EOFError:
-        pass
+    for line in parse_input():
+        x, y, z = line.split(",")
+        res.add((int(x), int(y), int(z)))
     return res
 
 
 def main1() -> int:
-    voxels = parse_input()
+    voxels = parse_voxels()
     count_faces = 0
     for x, y, z in voxels:
         for dx, dy, dz in [(1, 0, 0), (0, 1, 0), (0, 0, 1)]:
@@ -24,7 +23,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    object_voxels = parse_input()
+    object_voxels = parse_voxels()
 
     # Find the coordinates of a cuboid surrounding the lava droplet
     x_min, x_max, y_min, y_max, z_min, z_max = 0, 0, 0, 0, 0, 0

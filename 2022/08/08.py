@@ -1,14 +1,13 @@
 import math
 
+from utils.parsing import parse_input
+
 
 def get_grid() -> list[list[int]]:
     grid: list[list[int]] = []
-    try:
-        while line := input().strip():
-            row = [int(c) for c in line]
-            grid.append(row)
-    except EOFError:
-        pass
+    for line in parse_input():
+        row = [int(c) for c in line]
+        grid.append(row)
     return grid
 
 

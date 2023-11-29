@@ -1,5 +1,7 @@
 from collections import defaultdict
 
+from utils.parsing import parse_input
+
 
 def get_absolute_path(pwd: list[str]) -> str:
     return "/" + "/".join(pwd)
@@ -8,31 +10,27 @@ def get_absolute_path(pwd: list[str]) -> str:
 def get_filesystem_size() -> dict[str, int]:
     size_by_path: dict[str, int] = defaultdict(int)
     pwd: list[str] = []
-    try:
-        while line := input().strip():
-            if line.startswith("$ cd "):
-                path = line.split(" ")[-1]
-                if path == "/":
-                    pwd = []
-                elif path == "..":
-                    pwd.pop()
-                else:
-                    pwd.append(path)
-
-            elif line.startswith("$ "):
-                continue
-
-            elif line.startswith("dir "):
-                continue
-
+    for line in parse_input():
+        if line.startswith("$ cd "):
+            path = line.split(" ")[-1]
+            if path == "/":
+                pwd = []
+            elif path == "..":
+                pwd.pop()
             else:
-                size, name = line.split(" ", 1)
-                for i in range(len(pwd) + 1):
-                    absolute_path = get_absolute_path(pwd[:i])
-                    size_by_path[absolute_path] += int(size)
+                pwd.append(path)
 
-    except EOFError:
-        pass
+        elif line.startswith("$ "):
+            continue
+
+        elif line.startswith("dir "):
+            continue
+
+        else:
+            size, name = line.split(" ", 1)
+            for i in range(len(pwd) + 1):
+                absolute_path = get_absolute_path(pwd[:i])
+                size_by_path[absolute_path] += int(size)
     return size_by_path
 
 

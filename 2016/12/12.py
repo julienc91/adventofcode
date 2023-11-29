@@ -1,15 +1,8 @@
-def parse_instructions() -> list[str]:
-    res: list[str] = []
-    try:
-        while line := input().strip():
-            res.append(line)
-    except EOFError:
-        pass
-    return res
+from utils.parsing import parse_input
 
 
 def _main(registries: dict[str, int]) -> int:
-    instructions = parse_instructions()
+    instructions = list(parse_input())
     index = 0
 
     while index < len(instructions):

@@ -1,5 +1,7 @@
 from collections import defaultdict
 
+from utils.parsing import parse_input
+
 
 class Node:
     def __init__(self, name: str) -> None:
@@ -39,14 +41,11 @@ class Tree:
 
 def get_tree() -> Tree:
     tree = Tree()
-    try:
-        while line := input().strip():
-            left, _, right = line.partition(" -> ")
-            name, weight = left.split()
-            children = right.split(", ") if right else []
-            tree.add_node(name, int(weight[1:-1]), children)
-    except EOFError:
-        pass
+    for line in parse_input():
+        left, _, right = line.partition(" -> ")
+        name, weight = left.split()
+        children = right.split(", ") if right else []
+        tree.add_node(name, int(weight[1:-1]), children)
     return tree
 
 

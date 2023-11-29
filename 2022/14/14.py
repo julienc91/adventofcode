@@ -2,6 +2,8 @@ from collections import defaultdict
 from collections.abc import Iterator
 from enum import Enum
 
+from utils.parsing import parse_input
+
 
 class State(Enum):
     AIR = "."
@@ -9,25 +11,20 @@ class State(Enum):
     SAND = "o"
 
 
-def parse_input() -> dict[tuple[int, int], State]:
+def parse_grid() -> dict[tuple[int, int], State]:
     grid: dict[tuple[int, int], State] = defaultdict(lambda: State.AIR)
-    try:
-        while line := input().strip():
-            coordinates = [
-                tuple(map(int, item.split(","))) for item in line.split(" -> ")
-            ]
-            x1, y1 = coordinates.pop(0)
-            while coordinates:
-                x2, y2 = coordinates.pop(0)
-                if x1 == x2:
-                    for y in range(min(y1, y2), max(y1, y2) + 1):
-                        grid[(x1, y)] = State.ROCK
-                else:
-                    for x in range(min(x1, x2), max(x1, x2) + 1):
-                        grid[(x, y1)] = State.ROCK
-                x1, y1 = x2, y2
-    except EOFError:
-        pass
+    for line in parse_input():
+        coordinates = [tuple(map(int, item.split(","))) for item in line.split(" -> ")]
+        x1, y1 = coordinates.pop(0)
+        while coordinates:
+            x2, y2 = coordinates.pop(0)
+            if x1 == x2:
+                for y in range(min(y1, y2), max(y1, y2) + 1):
+                    grid[(x1, y)] = State.ROCK
+            else:
+                for x in range(min(x1, x2), max(x1, x2) + 1):
+                    grid[(x, y1)] = State.ROCK
+            x1, y1 = x2, y2
     return grid
 
 
@@ -78,7 +75,7 @@ def print_grid(grid: dict[tuple[int, int], State]) -> None:
 
 
 def main1() -> int:
-    grid = parse_input()
+    grid = parse_grid()
 
     count_sand = 0
     for _ in make_sand(grid, with_floor=False):
@@ -87,7 +84,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    grid = parse_input()
+    grid = parse_grid()
 
     count_sand = 0
     for _ in make_sand(grid, with_floor=True):

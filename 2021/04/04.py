@@ -1,15 +1,14 @@
+from utils.parsing import parse_input
+
 GRID_SIZE = 5
 
 
 def parse_grids() -> list[list[tuple[int, bool]]]:
     grids = []
-    try:
-        while True:
-            _ = input()
-            grid = [(int(i), False) for _ in range(GRID_SIZE) for i in input().split()]
-            grids.append(grid)
-    except EOFError:
-        return grids
+    for _ in parse_input():
+        grid = [(int(i), False) for _ in range(GRID_SIZE) for i in input().split()]
+        grids.append(grid)
+    return grids
 
 
 def update_grid_with_picked_number(

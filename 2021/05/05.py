@@ -1,17 +1,15 @@
 from collections import defaultdict
 from collections.abc import Iterator
 
+from utils.parsing import parse_input
+
 
 def parse_coordinates() -> Iterator[tuple[tuple[int, int], tuple[int, int]]]:
-    try:
-        while True:
-            line = input()
-            c1, c2 = line.split(" -> ")
-            x1, y1 = [int(n) for n in c1.split(",")]
-            x2, y2 = [int(n) for n in c2.split(",")]
-            yield (x1, y1), (x2, y2)
-    except EOFError:
-        pass
+    for line in parse_input():
+        c1, c2 = line.split(" -> ")
+        x1, y1 = [int(n) for n in c1.split(",")]
+        x2, y2 = [int(n) for n in c2.split(",")]
+        yield (x1, y1), (x2, y2)
 
 
 def update_grid_with_coordinates(

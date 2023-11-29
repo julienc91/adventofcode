@@ -2,19 +2,18 @@ import itertools
 import string
 import sys
 
+from utils.parsing import parse_input
+
 priorities = {char: index for index, char in enumerate(string.ascii_letters, start=1)}
 
 
 def main1() -> int:
     priority = 0
-    try:
-        while line := input().strip():
-            left = set(line[: len(line) // 2])
-            right = set(line[len(line) // 2 :])
-            duplicate = (left & right).pop()
-            priority += priorities[duplicate]
-    except EOFError:
-        pass
+    for line in parse_input():
+        left = set(line[: len(line) // 2])
+        right = set(line[len(line) // 2 :])
+        duplicate = (left & right).pop()
+        priority += priorities[duplicate]
     return priority
 
 

@@ -2,6 +2,8 @@ import itertools
 from collections import deque
 from functools import cache
 
+from utils.parsing import parse_input
+
 Point = tuple[int, int]
 
 
@@ -10,16 +12,13 @@ def parse_map() -> tuple[frozenset[Point], list[Point]]:
     targets: dict[int, Point] = {}
 
     y = 0
-    try:
-        while line := input().strip():
-            for x, c in enumerate(line):
-                if c != "#":
-                    res.add((x, y))
-                if c.isdigit():
-                    targets[int(c)] = (x, y)
-            y += 1
-    except EOFError:
-        pass
+    for line in parse_input():
+        for x, c in enumerate(line):
+            if c != "#":
+                res.add((x, y))
+            if c.isdigit():
+                targets[int(c)] = (x, y)
+        y += 1
     return frozenset(res), [targets[i] for i in range(len(targets))]
 
 

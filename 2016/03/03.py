@@ -1,5 +1,7 @@
 from collections.abc import Callable, Iterator
 
+from utils.parsing import parse_input
+
 
 def _main(parse_lengths: Callable[[], Iterator[tuple[int, int, int]]]) -> int:
     count = 0
@@ -12,12 +14,9 @@ def _main(parse_lengths: Callable[[], Iterator[tuple[int, int, int]]]) -> int:
 
 def main1() -> int:
     def parse_lengths() -> Iterator[tuple[int, int, int]]:
-        try:
-            while line := input().strip():
-                a, b, c = map(int, line.split())
-                yield a, b, c
-        except EOFError:
-            pass
+        for line in parse_input():
+            a, b, c = map(int, line.split())
+            yield a, b, c
 
     return _main(parse_lengths)
 
@@ -25,13 +24,10 @@ def main1() -> int:
 def main2() -> int:
     def parse_lengths() -> Iterator[tuple[int, int, int]]:
         rows: list[list[int]] = [[], [], []]
-        try:
-            while line := input().strip():
-                numbers = map(int, line.split())
-                for i, row in zip(numbers, rows):
-                    row.append(i)
-        except EOFError:
-            pass
+        for line in parse_input():
+            numbers = map(int, line.split())
+            for i, row in zip(numbers, rows):
+                row.append(i)
         for row in rows:
             while row:
                 a, b, c = row.pop(0), row.pop(0), row.pop(0)

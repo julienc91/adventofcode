@@ -1,10 +1,10 @@
+from utils.parsing import parse_input
+
+
 def parse_grid() -> list[list[bool]]:
     grid: list[list[bool]] = []
-    try:
-        while line := input().strip():
-            grid.append([c == "#" for c in line])
-    except EOFError:
-        pass
+    for line in parse_input():
+        grid.append([c == "#" for c in line])
     return grid
 
 

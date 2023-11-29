@@ -2,6 +2,8 @@ import math
 from collections.abc import Callable, Iterator
 from dataclasses import dataclass
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Ingredient:
@@ -15,33 +17,31 @@ class Ingredient:
 
 def parse_ingredients() -> list[Ingredient]:
     res = []
-    try:
-        while line := input().strip().replace(",", ""):
-            (
-                name,
-                _,
-                capacity,
-                _,
-                durability,
-                _,
-                flavor,
-                _,
-                texture,
-                _,
-                calories,
-            ) = line.split()
-            res.append(
-                Ingredient(
-                    name=name.rstrip(":"),
-                    capacity=int(capacity),
-                    durability=int(durability),
-                    flavor=int(flavor),
-                    texture=int(texture),
-                    calories=int(calories),
-                )
+    for line in parse_input():
+        line = line.replace(",", "")
+        (
+            name,
+            _,
+            capacity,
+            _,
+            durability,
+            _,
+            flavor,
+            _,
+            texture,
+            _,
+            calories,
+        ) = line.split()
+        res.append(
+            Ingredient(
+                name=name.rstrip(":"),
+                capacity=int(capacity),
+                durability=int(durability),
+                flavor=int(flavor),
+                texture=int(texture),
+                calories=int(calories),
             )
-    except EOFError:
-        pass
+        )
     return res
 
 

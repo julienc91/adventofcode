@@ -1,11 +1,8 @@
+from utils.parsing import parse_input
+
+
 def parse_containers() -> list[int]:
-    res: list[int] = []
-    try:
-        while line := input():
-            res.append(int(line.strip()))
-    except EOFError:
-        pass
-    return res
+    return [int(line) for line in parse_input()]
 
 
 def get_combinations(containers: list[int], total: int) -> set[tuple[int, ...]]:

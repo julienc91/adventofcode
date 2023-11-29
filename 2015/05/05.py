@@ -1,12 +1,6 @@
-from collections.abc import Callable, Iterator
+from collections.abc import Callable
 
-
-def parse_input() -> Iterator[str]:
-    try:
-        while line := input().strip():
-            yield line
-    except EOFError:
-        pass
+from utils.parsing import parse_input
 
 
 def is_nice_v1(string: str) -> bool:

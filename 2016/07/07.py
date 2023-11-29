@@ -1,12 +1,4 @@
-from collections.abc import Iterator
-
-
-def parse_addresses() -> Iterator[str]:
-    try:
-        while line := input().strip():
-            yield line
-    except EOFError:
-        pass
+from utils.parsing import parse_input
 
 
 def is_tls(address: str) -> bool:
@@ -58,8 +50,8 @@ def is_ssl(address: str) -> bool:
 
 
 def main1() -> int:
-    return sum(1 for address in parse_addresses() if is_tls(address))
+    return sum(1 for address in parse_input() if is_tls(address))
 
 
 def main2() -> int:
-    return sum(1 for address in parse_addresses() if is_ssl(address))
+    return sum(1 for address in parse_input() if is_ssl(address))

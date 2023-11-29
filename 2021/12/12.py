@@ -1,15 +1,14 @@
 from collections import defaultdict
 
+from utils.parsing import parse_input
+
 
 def parse_paths() -> dict[str, list[str]]:
     paths = defaultdict(list)
-    try:
-        while line := input().strip():
-            a, b = line.split("-")
-            paths[a].append(b)
-            paths[b].append(a)
-    except EOFError:
-        pass
+    for line in parse_input():
+        a, b = line.split("-")
+        paths[a].append(b)
+        paths[b].append(a)
     return paths
 
 

@@ -1,7 +1,9 @@
 from collections.abc import Callable, Iterator
 
+from utils.parsing import parse_input
 
-def parse_input() -> list[list[str]]:
+
+def parse_stacks() -> list[list[str]]:
     nb_stacks = 9
     stack_input_length = 4
     stacks: list[list[str]] = [[] for _ in range(nb_stacks)]
@@ -18,12 +20,9 @@ def parse_input() -> list[list[str]]:
 
 
 def parse_instructions() -> Iterator[tuple[int, int, int]]:
-    try:
-        while line := input().strip():
-            elements = line.split()
-            yield int(elements[1]), int(elements[3]), int(elements[5])
-    except EOFError:
-        pass
+    for line in parse_input():
+        elements = line.split()
+        yield int(elements[1]), int(elements[3]), int(elements[5])
 
 
 def cratemover_9000(stacks: list[list[str]], instruction: tuple[int, int, int]) -> None:
@@ -42,7 +41,7 @@ def cratemover_9001(stacks: list[list[str]], instruction: tuple[int, int, int]) 
 def _main(
     apply_instruction: Callable[[list[list[str]], tuple[int, int, int]], None]
 ) -> str:
-    stacks = parse_input()
+    stacks = parse_stacks()
     for instruction in parse_instructions():
         apply_instruction(stacks, instruction)
     return "".join(stack[0] for stack in stacks if stack)

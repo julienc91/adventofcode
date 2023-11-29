@@ -1,10 +1,10 @@
-def parse_input() -> list[list[int]]:
+from utils.parsing import parse_input
+
+
+def parse_grid() -> list[list[int]]:
     grid = []
-    try:
-        while data := input().strip():
-            grid.append([int(i) for i in data])
-    except EOFError:
-        pass
+    for data in parse_input():
+        grid.append([int(i) for i in data])
     return grid
 
 
@@ -48,14 +48,14 @@ def do_step(grid: list[list[int]]) -> int:
 def main1() -> int:
     nb_steps = 100
     result = 0
-    grid = parse_input()
+    grid = parse_grid()
     for step in range(nb_steps):
         result += do_step(grid)
     return result
 
 
 def main2() -> int:
-    grid = parse_input()
+    grid = parse_grid()
     h, w = len(grid), len(grid[0])
     step = 1
     while do_step(grid) < h * w:

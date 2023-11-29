@@ -1,10 +1,10 @@
+from utils.parsing import parse_input
+
+
 def parse_instructions() -> list[list[str]]:
     instructions: list[list[str]] = []
-    try:
-        while line := input().strip():
-            instructions.append(line.replace(",", "").split())
-    except EOFError:
-        pass
+    for line in parse_input():
+        instructions.append(line.replace(",", "").split())
     return instructions
 
 

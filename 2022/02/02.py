@@ -1,5 +1,7 @@
 from enum import Enum
 
+from utils.parsing import parse_input
+
 
 class Shape(Enum):
     ROCK = 0
@@ -65,13 +67,10 @@ class Game2(AbstractGame):
 
 def _main(game_type: type[AbstractGame]) -> int:
     score = 0
-    try:
-        while line := input().strip():
-            opponent, player = line.split()
-            game = game_type(player, opponent)
-            score += game.get_score()
-    except EOFError:
-        pass
+    for line in parse_input():
+        opponent, player = line.split()
+        game = game_type(player, opponent)
+        score += game.get_score()
     return score
 
 

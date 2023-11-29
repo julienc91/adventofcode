@@ -1,3 +1,6 @@
+from utils.parsing import parse_input
+
+
 class Processor:
     CRT_WIDTH = 40
 
@@ -8,11 +11,8 @@ class Processor:
         self.crt: list[bool] = []
 
     def process_input(self) -> None:
-        try:
-            while line := input().strip():
-                self.add_instruction(line)
-        except EOFError:
-            pass
+        for line in parse_input():
+            self.add_instruction(line)
 
     def add_instruction(self, instruction: str) -> None:
         if instruction == "noop":

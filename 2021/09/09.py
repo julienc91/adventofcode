@@ -1,3 +1,6 @@
+from utils.parsing import parse_input
+
+
 def is_low_point(x: int, y: int, grid: list[list[int]]) -> bool:
     adjacent_cells = [(x, y + 1), (x, y - 1), (x + 1, y), (x - 1, y)]
     for a, b in adjacent_cells:
@@ -35,11 +38,8 @@ def fill_bassin(
 
 def parse_grid() -> list[list[int]]:
     grid: list[list[int]] = []
-    try:
-        while line := input():
-            grid.append([int(i) for i in line.strip()])
-    except EOFError:
-        pass
+    for line in parse_input():
+        grid.append([int(i) for i in line.strip()])
     return grid
 
 

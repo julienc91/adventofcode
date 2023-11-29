@@ -2,6 +2,8 @@ import os.path
 from dataclasses import dataclass
 from functools import cached_property
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Node:
@@ -28,18 +30,15 @@ class Node:
 def parse_nodes() -> list[Node]:
     _ = input(), input()
     res: list[Node] = []
-    try:
-        while line := input().strip():
-            path, size, used, _, _ = line.split()
-            res.append(
-                Node(
-                    name=os.path.basename(path),
-                    size=int(size[:-1]),
-                    used=int(used[:-1]),
-                )
+    for line in parse_input():
+        path, size, used, _, _ = line.split()
+        res.append(
+            Node(
+                name=os.path.basename(path),
+                size=int(size[:-1]),
+                used=int(used[:-1]),
             )
-    except EOFError:
-        pass
+        )
     return res
 
 

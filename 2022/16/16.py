@@ -3,6 +3,8 @@ from collections.abc import Iterable
 from dataclasses import dataclass, field
 from functools import cache
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Valve:
@@ -19,30 +21,27 @@ class Valve:
         return self.name == other.name
 
 
-def parse_input() -> dict[str, Valve]:
+def parse_valves() -> dict[str, Valve]:
     regex = re.compile(
         r"Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? (?P<links>(\w+(, )?)+)"
     )
     valves_by_name: dict[str, Valve] = {}
-    try:
-        while line := input().strip():
-            match = regex.match(line)
-            if not match:
-                break
+    for line in parse_input():
+        match = regex.match(line)
+        if not match:
+            break
 
-            groups = match.groups()
-            name = groups[0]
-            flow_rate = int(groups[1])
-            links = match.group("links").split(", ")
-            valve = Valve(name=name, flow_rate=flow_rate)
-            for linked_valve_name in links:
-                linked_valve = valves_by_name.get(linked_valve_name)
-                if linked_valve:
-                    valve.links.add(linked_valve)
-                    linked_valve.links.add(valve)
-            valves_by_name[valve.name] = valve
-    except EOFError:
-        pass
+        groups = match.groups()
+        name = groups[0]
+        flow_rate = int(groups[1])
+        links = match.group("links").split(", ")
+        valve = Valve(name=name, flow_rate=flow_rate)
+        for linked_valve_name in links:
+            linked_valve = valves_by_name.get(linked_valve_name)
+            if linked_valve:
+                valve.links.add(linked_valve)
+                linked_valve.links.add(valve)
+        valves_by_name[valve.name] = valve
     return valves_by_name
 
 
@@ -106,7 +105,7 @@ def iterate_solo_paths(
 
 
 def main1() -> int:
-    valves_by_name = parse_input()
+    valves_by_name = parse_valves()
     total_time = 30
 
     start_valve = valves_by_name["AA"]
@@ -122,7 +121,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    valves_by_name = parse_input()
+    valves_by_name = parse_valves()
     total_time = 26
 
     start_valve = valves_by_name["AA"]

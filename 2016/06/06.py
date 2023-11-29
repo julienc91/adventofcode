@@ -1,19 +1,11 @@
 from collections import Counter
 from collections.abc import Callable
 
-
-def parse_messages() -> list[str]:
-    res: list[str] = []
-    try:
-        while line := input().strip():
-            res.append(line)
-    except EOFError:
-        pass
-    return res
+from utils.parsing import parse_input
 
 
 def _main(selector: Callable[[Counter[str]], str]) -> str:
-    messages = parse_messages()
+    messages = list(parse_input())
     message_length = len(messages[0])
     res = ""
     for i in range(message_length):

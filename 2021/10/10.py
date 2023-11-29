@@ -1,14 +1,6 @@
-from collections.abc import Iterator
+from utils.parsing import parse_input
 
 pairs = {")": "(", "]": "[", "}": "{", ">": "<"}
-
-
-def parse_input() -> Iterator[str]:
-    try:
-        while line := input().strip():
-            yield line
-    except EOFError:
-        pass
 
 
 def build_stack(line: str) -> tuple[str | None, list[str]]:
