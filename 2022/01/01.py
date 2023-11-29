@@ -1,14 +1,13 @@
+from utils.parsing import parse_input
+
+
 def _main() -> list[int]:
     elves = [0]
-    try:
-        while True:
-            line = input().strip()
-            if not line:
-                elves.append(0)
-            else:
-                elves[-1] += int(line)
-    except EOFError:
-        pass
+    for line in parse_input():
+        if not line:
+            elves.append(0)
+        else:
+            elves[-1] += int(line)
     return sorted(elves)
 
 

@@ -1,6 +1,8 @@
 import re
 from collections.abc import Iterator
 
+from utils.parsing import parse_input
+
 Cuboid = tuple[int, int, int, int, int, int]
 
 
@@ -13,23 +15,20 @@ def parse_instructions() -> Iterator[tuple[bool, Cuboid]]:
     line_format = re.compile(
         r"(on|off) x=(-?\d+)\.\.(-?\d+),y=(-?\d+)\.\.(-?\d+),z=(-?\d+)\.\.(-?\d+)"
     )
-    try:
-        while line := input().strip():
-            match = line_format.search(line)
-            assert match
-            yield (
-                match.group(1) == "on",
-                (
-                    int(match.group(2)),
-                    int(match.group(3)),
-                    int(match.group(4)),
-                    int(match.group(5)),
-                    int(match.group(6)),
-                    int(match.group(7)),
-                ),
-            )
-    except EOFError:
-        pass
+    for line in parse_input():
+        match = line_format.search(line)
+        assert match
+        yield (
+            match.group(1) == "on",
+            (
+                int(match.group(2)),
+                int(match.group(3)),
+                int(match.group(4)),
+                int(match.group(5)),
+                int(match.group(6)),
+                int(match.group(7)),
+            ),
+        )
 
 
 def has_intersection(c1: Cuboid, c2: Cuboid) -> bool:

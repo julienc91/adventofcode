@@ -1,3 +1,6 @@
+from utils.parsing import parse_input
+
+
 def snafu_to_dec(number: str) -> int:
     res = 0
     for i, c in enumerate(number[::-1]):
@@ -16,11 +19,8 @@ def dec_to_snafu(number: int) -> str:
 
 def main1() -> str:
     count = 0
-    try:
-        while line := input().strip():
-            count += snafu_to_dec(line)
-    except EOFError:
-        pass
+    for line in parse_input():
+        count += snafu_to_dec(line)
     return dec_to_snafu(count)
 
 

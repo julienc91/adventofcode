@@ -1,18 +1,18 @@
+from utils.parsing import parse_input
+
+
 def parse_descriptions() -> list[dict[str, int]]:
     res: list[dict[str, int]] = []
-    try:
-        while line := input().strip():
-            line = line.replace(":", "").replace(",", "")
-            _, _, t1, c1, t2, c2, t3, c3 = line.split(" ")
-            res.append(
-                {
-                    t1: int(c1),
-                    t2: int(c2),
-                    t3: int(c3),
-                }
-            )
-    except EOFError:
-        pass
+    for line in parse_input():
+        line = line.replace(":", "").replace(",", "")
+        _, _, t1, c1, t2, c2, t3, c3 = line.split(" ")
+        res.append(
+            {
+                t1: int(c1),
+                t2: int(c2),
+                t3: int(c3),
+            }
+        )
     return res
 
 

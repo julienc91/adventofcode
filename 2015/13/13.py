@@ -1,15 +1,14 @@
 import itertools
 from collections import defaultdict
 
+from utils.parsing import parse_input
+
 
 def parse_affinities() -> dict[str, dict[str, int]]:
     res: dict[str, dict[str, int]] = defaultdict(dict)
-    try:
-        while line := input().strip():
-            a, _, lose_or_gain, quantity, _, _, _, _, _, _, b = line.rstrip(".").split()
-            res[a][b] = int(quantity) * (1 if lose_or_gain == "gain" else -1)
-    except EOFError:
-        pass
+    for line in parse_input():
+        a, _, lose_or_gain, quantity, _, _, _, _, _, _, b = line.rstrip(".").split()
+        res[a][b] = int(quantity) * (1 if lose_or_gain == "gain" else -1)
     return res
 
 

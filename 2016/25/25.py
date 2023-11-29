@@ -1,14 +1,6 @@
 from collections.abc import Iterator
 
-
-def parse_instructions() -> list[str]:
-    res: list[str] = []
-    try:
-        while line := input().strip():
-            res.append(line)
-    except EOFError:
-        pass
-    return res
+from utils.parsing import parse_input
 
 
 def execute(instructions: list[str], a: int) -> Iterator[int]:
@@ -46,7 +38,7 @@ def execute(instructions: list[str], a: int) -> Iterator[int]:
 def main1() -> int:
     n = 0
     min_length = 10
-    instructions = parse_instructions()
+    instructions = list(parse_input())
 
     while True:
         stack = []

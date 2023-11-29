@@ -1,16 +1,15 @@
 from collections import Counter
 from collections.abc import Iterator
 
+from utils.parsing import parse_input
+
 
 def parse_rooms() -> Iterator[tuple[str, str, int]]:
-    try:
-        while line := input().strip():
-            checksum = line[-6:-1]
-            name, remaining = line.rsplit("-", 1)
-            sector_id = int(remaining.split("[")[0])
-            yield name, checksum, sector_id
-    except EOFError:
-        pass
+    for line in parse_input():
+        checksum = line[-6:-1]
+        name, remaining = line.rsplit("-", 1)
+        sector_id = int(remaining.split("[")[0])
+        yield name, checksum, sector_id
 
 
 def is_real_room(name: str, checksum: str) -> bool:

@@ -1,14 +1,6 @@
 from collections.abc import Callable
 
-
-def parse_instructions() -> list[str]:
-    res = []
-    try:
-        while line := input().strip():
-            res.append(line)
-    except EOFError:
-        pass
-    return res
+from utils.parsing import parse_input
 
 
 def get_value_from_wire_or_raw_signal(
@@ -56,13 +48,13 @@ def compute_circuit(instructions: list[str]) -> dict[str, int]:
 
 
 def main1() -> int:
-    instructions = parse_instructions()
+    instructions = list(parse_input())
     circuit = compute_circuit(instructions)
     return circuit["a"]
 
 
 def main2() -> int:
-    instructions = parse_instructions()
+    instructions = list(parse_input())
     circuit = compute_circuit(instructions[:])
 
     instructions = [f"{circuit['a']} -> b"] + [

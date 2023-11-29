@@ -1,4 +1,6 @@
-from typing import Callable
+from collections.abc import Callable
+
+from utils.parsing import parse_input
 
 OPERATORS: dict[str, Callable[[int, int], int]] = {
     "+": lambda a, b: a + b,
@@ -20,18 +22,15 @@ REVERSE_RIGHT: dict[str, Callable[[int, int], int]] = {
 }
 
 
-def parse_input() -> dict[str, int | tuple[str, str, str]]:
+def parse_data() -> dict[str, int | tuple[str, str, str]]:
     res: dict[str, int | tuple[str, str, str]] = {}
-    try:
-        while line := input().strip():
-            name, operation = line.split(": ")
-            if operation.isdigit():
-                res[name] = int(operation)
-            else:
-                left, operator, right = operation.split(" ")
-                res[name] = (left, right, operator)
-    except EOFError:
-        pass
+    for line in parse_input():
+        name, operation = line.split(": ")
+        if operation.isdigit():
+            res[name] = int(operation)
+        else:
+            left, operator, right = operation.split(" ")
+            res[name] = (left, right, operator)
     return res
 
 
@@ -74,12 +73,12 @@ def solve(
 
 
 def main1() -> int:
-    data = parse_input()
+    data = parse_data()
     return compute("root", data)
 
 
 def main2() -> int:
-    data = parse_input()
+    data = parse_data()
     del data["humn"]
 
     value = data["root"]

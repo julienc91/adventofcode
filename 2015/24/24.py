@@ -2,15 +2,11 @@ import itertools
 import math
 from collections.abc import Iterator
 
+from utils.parsing import parse_input
+
 
 def parse_weights() -> list[int]:
-    res: list[int] = []
-    try:
-        while line := input().strip():
-            res.append(int(line))
-    except EOFError:
-        pass
-    return res
+    return [int(line) for line in parse_input()]
 
 
 def get_groups_of_weight(weights: list[int], target: int) -> Iterator[tuple[int, ...]]:

@@ -1,18 +1,12 @@
 import re
 from collections import defaultdict
-from collections.abc import Callable, Iterator
+from collections.abc import Callable
+
+from utils.parsing import parse_input
 
 instruction_format = re.compile(
     r"(turn on|turn off|toggle) (\d+),(\d+) through (\d+),(\d+)"
 )
-
-
-def parse_instructions() -> Iterator[str]:
-    try:
-        while line := input().strip():
-            yield line
-    except EOFError:
-        pass
 
 
 def update_grid(
@@ -34,7 +28,7 @@ def update_grid(
 
 def main_(operations: dict[str, Callable[[int], int]]) -> int:
     grid: dict[tuple[int, int], int] = defaultdict(int)
-    for instruction in parse_instructions():
+    for instruction in parse_input():
         update_grid(instruction, grid, operations)
     return sum(grid.values())
 

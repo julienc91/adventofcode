@@ -1,5 +1,6 @@
-from collections.abc import Iterator
 from dataclasses import dataclass
+
+from utils.parsing import parse_input
 
 
 @dataclass
@@ -28,17 +29,9 @@ class Bot:
         self.chips = (0, 0)
 
 
-def parse_instructions() -> Iterator[str]:
-    try:
-        while line := input().strip():
-            yield line
-    except EOFError:
-        pass
-
-
 def setup_bots() -> dict[str, Bot]:
     all_bots: dict[str, Bot] = {}
-    for line in parse_instructions():
+    for line in parse_input():
         if line.startswith("value"):
             _, value, _, _, _, bot_name = line.split()
             bot_name = f"bot_{bot_name}"

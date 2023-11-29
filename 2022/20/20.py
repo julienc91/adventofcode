@@ -1,5 +1,7 @@
 from collections import deque
 
+from utils.parsing import parse_input
+
 
 class Mixer:
     def __init__(self, data: list[int]) -> None:
@@ -26,16 +28,6 @@ class Mixer:
         return self.data
 
 
-def parse_input() -> list[int]:
-    res: list[int] = []
-    try:
-        while line := input().strip():
-            res.append(int(line))
-    except EOFError:
-        pass
-    return res
-
-
 def find_grove_coordinates(data: list[int]) -> int:
     index_0 = data.index(0)
     return sum(
@@ -48,7 +40,7 @@ def find_grove_coordinates(data: list[int]) -> int:
 
 
 def main1() -> int:
-    data = parse_input()
+    data = [int(line) for line in parse_input()]
     mixer = Mixer(data)
 
     mix_result = mixer.mix()
@@ -56,7 +48,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    data = parse_input()
+    data = [int(line) for line in parse_input()]
     decryption_key = 811589153
     data = list(map(lambda n: n * decryption_key, data))
 

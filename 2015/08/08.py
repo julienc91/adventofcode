@@ -1,13 +1,6 @@
 import re
-from collections.abc import Iterator
 
-
-def parse_input() -> Iterator[str]:
-    try:
-        while line := input().strip():
-            yield line
-    except EOFError:
-        pass
+from utils.parsing import parse_input
 
 
 def main1() -> int:

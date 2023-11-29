@@ -4,6 +4,8 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache, cached_property
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Scanner:
@@ -58,19 +60,15 @@ rotations = [
 
 def parse_scanners() -> list[Scanner]:
     scanners: list[Scanner] = []
-    try:
-        scanner = None
-        while True:
-            line = input().strip()
-            if line.startswith("---"):
-                scanner = Scanner(name=str(len(scanners)), beacons=[])
-                scanners.append(scanner)
-            elif line:
-                assert scanner
-                x, y, z = map(int, line.split(","))
-                scanner.beacons.append((x, y, z))
-    except EOFError:
-        pass
+    scanner = None
+    for line in parse_input():
+        if line.startswith("---"):
+            scanner = Scanner(name=str(len(scanners)), beacons=[])
+            scanners.append(scanner)
+        elif line:
+            assert scanner
+            x, y, z = map(int, line.split(","))
+            scanner.beacons.append((x, y, z))
     return scanners
 
 

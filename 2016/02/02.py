@@ -1,18 +1,10 @@
-from collections.abc import Iterator
-
-
-def parse_instructions() -> Iterator[str]:
-    try:
-        while line := input().strip():
-            yield line
-    except EOFError:
-        pass
+from utils.parsing import parse_input
 
 
 def _main(keypad: dict[str, dict[str, str]]) -> str:
     digit = "5"
     code = ""
-    for digit_instruction in parse_instructions():
+    for digit_instruction in parse_input():
         for direction in digit_instruction:
             digit = keypad[digit].get(direction, digit)
         code += digit

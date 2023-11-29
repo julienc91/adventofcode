@@ -1,11 +1,11 @@
+from utils.parsing import parse_input
+
+
 def parse_blocklists() -> list[tuple[int, int]]:
     res: list[tuple[int, int]] = []
-    try:
-        while line := input():
-            a, b = line.split("-")
-            res.append((int(a), int(b)))
-    except EOFError:
-        pass
+    for line in parse_input():
+        a, b = line.split("-")
+        res.append((int(a), int(b)))
     return res
 
 

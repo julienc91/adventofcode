@@ -1,3 +1,6 @@
+from utils.parsing import parse_input
+
+
 def parse_coordinates() -> set[tuple[int, int]]:
     coordinates = set()
     while line := input().strip():
@@ -8,13 +11,10 @@ def parse_coordinates() -> set[tuple[int, int]]:
 
 def parse_instructions() -> list[tuple[str, int]]:
     instructions = []
-    try:
-        while line := input().strip():
-            left, right = line.split("=")
-            along = left[-1]
-            instructions.append((along, int(right)))
-    except EOFError:
-        pass
+    for line in parse_input():
+        left, right = line.split("=")
+        along = left[-1]
+        instructions.append((along, int(right)))
     return instructions
 
 

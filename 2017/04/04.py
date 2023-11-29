@@ -1,14 +1,13 @@
 from collections.abc import Callable
 
+from utils.parsing import parse_input
+
 
 def _main(checker: Callable[[str], bool]) -> int:
     counter = 0
-    try:
-        while line := input().strip():
-            if checker(line):
-                counter += 1
-    except EOFError:
-        pass
+    for line in parse_input():
+        if checker(line):
+            counter += 1
     return counter
 
 

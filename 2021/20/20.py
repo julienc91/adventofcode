@@ -1,3 +1,6 @@
+from utils.parsing import parse_input
+
+
 def parse_algorithm() -> list[bool]:
     line = input().strip()
     input()
@@ -6,17 +9,14 @@ def parse_algorithm() -> list[bool]:
 
 def parse_image() -> list[list[bool]]:
     res = []
-    try:
-        while line := input().strip():
-            res.append([c == "#" for c in line])
-    except EOFError:
-        pass
+    for line in parse_input():
+        res.append([c == "#" for c in line])
     return res
 
 
 def get_pixel(image: list[list[bool]], x: int, y: int, step: int) -> bool:
     if y < 0 or y >= len(image) or x < 0 or x >= len(image[y]):
-        return bool((step) % 2)
+        return bool(step % 2)
     return image[y][x]
 
 

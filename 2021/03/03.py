@@ -1,14 +1,13 @@
+from utils.parsing import parse_input
+
 DIGIT_SIZE = 12
 
 
 def main1() -> int:
     summary = [{0: 0, 1: 1} for _ in range(DIGIT_SIZE)]
-    try:
-        while value := input():
-            for i, bit in enumerate(value):
-                summary[i][int(bit)] += 1
-    except EOFError:
-        pass
+    for value in parse_input():
+        for i, bit in enumerate(value):
+            summary[i][int(bit)] += 1
 
     epsilon = ""
     gamma = ""
@@ -23,12 +22,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    values = []
-    try:
-        while value := input():
-            values.append(value)
-    except EOFError:
-        pass
+    values = list(parse_input())
 
     nb_bits = len(values[0])
     co2_filtered_values = values[:]

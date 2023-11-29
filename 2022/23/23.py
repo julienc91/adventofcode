@@ -1,5 +1,7 @@
 from enum import Enum
 
+from utils.parsing import parse_input
+
 
 class Direction(Enum):
     NORTH = "N"
@@ -8,17 +10,14 @@ class Direction(Enum):
     EAST = "E"
 
 
-def parse_input() -> set[tuple[int, int]]:
+def parse_locations() -> set[tuple[int, int]]:
     elves_locations: set[tuple[int, int]] = set()
-    try:
-        y = 0
-        while line := input().strip():
-            for x, c in enumerate(line):
-                if c == "#":
-                    elves_locations.add((x, y))
-            y += 1
-    except EOFError:
-        pass
+    y = 0
+    for line in parse_input():
+        for x, c in enumerate(line):
+            if c == "#":
+                elves_locations.add((x, y))
+        y += 1
     return elves_locations
 
 
@@ -55,7 +54,7 @@ def get_neighbours(
 
 
 def _main(nb_turns: int | None) -> tuple[int, int]:
-    locations = parse_input()
+    locations = parse_locations()
     nb_elves = len(locations)
     i = 0
     while nb_turns is None or i < nb_turns:

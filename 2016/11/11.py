@@ -4,6 +4,8 @@ from collections import deque
 from collections.abc import Iterator
 from dataclasses import dataclass
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Generator:
@@ -136,20 +138,17 @@ class Map:
         return new_map
 
 
-def parse_input() -> Map:
+def parse_map() -> Map:
     m = Map()
-    try:
-        while line := input().strip():
-            floor = Floor(number=len(m.floors))
-            for match in re.findall(r"\w+ generator", line):
-                name = match.split()[0]
-                floor.generators += (Generator(name=name),)
-            for match in re.findall(r"\w+-compatible microchip", line):
-                name = match.split("-")[0]
-                floor.microships += (Microship(name=name),)
-            m.floors += (floor,)
-    except EOFError:
-        pass
+    for line in parse_input():
+        floor = Floor(number=len(m.floors))
+        for match in re.findall(r"\w+ generator", line):
+            name = match.split()[0]
+            floor.generators += (Generator(name=name),)
+        for match in re.findall(r"\w+-compatible microchip", line):
+            name = match.split("-")[0]
+            floor.microships += (Microship(name=name),)
+        m.floors += (floor,)
     return m
 
 
@@ -170,12 +169,12 @@ def _main(start_map: Map) -> int:
 
 
 def main1() -> int:
-    start_map = parse_input()
+    start_map = parse_map()
     return _main(start_map)
 
 
 def main2() -> int:
-    start_map = parse_input()
+    start_map = parse_map()
     start_map.floors[0].generators += (
         Generator(name="elerium"),
         Generator(name="dilithium"),

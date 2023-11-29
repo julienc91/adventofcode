@@ -1,18 +1,11 @@
 from collections import defaultdict
-from collections.abc import Iterator
 
-
-def parse_instructions() -> Iterator[str]:
-    try:
-        while line := input().strip():
-            yield line
-    except EOFError:
-        pass
+from utils.parsing import parse_input
 
 
 def main1() -> int:
     res = 0
-    for instruction in parse_instructions():
+    for instruction in parse_input():
         if instruction.startswith("rect"):
             x, y = instruction.split()[1].split("x")
             res += int(x) * int(y)
@@ -21,7 +14,7 @@ def main1() -> int:
 
 def main2() -> str:
     grid: dict[tuple[int, int], bool] = defaultdict(bool)
-    for instruction in parse_instructions():
+    for instruction in parse_input():
         if instruction.startswith("rect"):
             x, y = map(int, instruction.split()[1].split("x"))
             for i in range(x):

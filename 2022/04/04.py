@@ -1,17 +1,16 @@
 from collections.abc import Callable
 
+from utils.parsing import parse_input
+
 
 def _main(checker: Callable[[tuple[int, int], tuple[int, int]], bool]) -> int:
     count = 0
-    try:
-        while line := input().strip():
-            range1, range2 = line.split(",")
-            a1, a2 = map(int, range1.split("-"))
-            b1, b2 = map(int, range2.split("-"))
-            if checker((a1, a2), (b1, b2)):
-                count += 1
-    except EOFError:
-        pass
+    for line in parse_input():
+        range1, range2 = line.split(",")
+        a1, a2 = map(int, range1.split("-"))
+        b1, b2 = map(int, range2.split("-"))
+        if checker((a1, a2), (b1, b2)):
+            count += 1
     return count
 
 

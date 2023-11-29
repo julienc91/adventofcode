@@ -1,13 +1,12 @@
 from collections.abc import Iterator
 
+from utils.parsing import parse_input
+
 
 def parse_descriptions() -> Iterator[tuple[int, int, int]]:
-    try:
-        while line := input().strip():
-            _, _, _, speed, _, _, duration, _, _, _, _, _, _, sleep, _ = line.split()
-            yield int(speed), int(duration), int(sleep)
-    except EOFError:
-        pass
+    for line in parse_input():
+        _, _, _, speed, _, _, duration, _, _, _, _, _, _, sleep, _ = line.split()
+        yield int(speed), int(duration), int(sleep)
 
 
 def evaluate1(speed: int, duration: int, sleep: int, stop_at: int) -> int:

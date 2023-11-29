@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Program:
@@ -7,7 +9,7 @@ class Program:
     direct_links: list["Program"]
 
 
-def parse_input() -> dict[int, Program]:
+def parse_programs() -> dict[int, Program]:
     programs_by_id = {}
 
     def get_program_from_id(program_id: int) -> Program:
@@ -15,22 +17,19 @@ def parse_input() -> dict[int, Program]:
             programs_by_id[program_id] = Program(program_id, [])
         return programs_by_id[program_id]
 
-    try:
-        while line := input().strip():
-            left, right = line.split(" <-> ")
-            program = get_program_from_id(int(left))
-            program.direct_links = [
-                get_program_from_id(int(connection_id))
-                for connection_id in right.split(", ")
-                if int(connection_id) != program.id
-            ]
-    except EOFError:
-        pass
+    for line in parse_input():
+        left, right = line.split(" <-> ")
+        program = get_program_from_id(int(left))
+        program.direct_links = [
+            get_program_from_id(int(connection_id))
+            for connection_id in right.split(", ")
+            if int(connection_id) != program.id
+        ]
     return programs_by_id
 
 
 def main1() -> int:
-    programs_by_id = parse_input()
+    programs_by_id = parse_programs()
     queue = [programs_by_id[0]]
     group: set[int] = set()
     while queue:
@@ -42,7 +41,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    programs_by_id = parse_input()
+    programs_by_id = parse_programs()
     groups: list[set[int]] = []
     queue: list[Program] = []
     while programs_by_id:

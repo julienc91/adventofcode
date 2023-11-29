@@ -1,6 +1,8 @@
 from enum import Enum
 from functools import cache
 
+from utils.parsing import parse_input
+
 
 class Direction(Enum):
     TOP = "^"
@@ -81,35 +83,32 @@ class Grid:
         raise RuntimeError
 
 
-def parse_input() -> tuple[Point, Point, Grid]:
+def parse_data() -> tuple[Point, Point, Grid]:
     width, height = 0, 0
     start, end = (0, 0), (0, 0)
     blizzards: set[tuple[Point, Direction]] = set()
-    try:
-        while line := input().strip():
-            if line[-3] == "#":
-                if start == (0, 0):
-                    width = len(line)
-                    start = (line.index("."), height)
-                else:
-                    end = (line.index("."), height)
+    for line in parse_input():
+        if line[-3] == "#":
+            if start == (0, 0):
+                width = len(line)
+                start = (line.index("."), height)
             else:
-                for x, c in enumerate(line):
-                    if c == "." or c == "#":
-                        continue
-                    else:
-                        blizzards.add(((x, height), Direction(c)))
-            height += 1
-    except EOFError:
-        pass
+                end = (line.index("."), height)
+        else:
+            for x, c in enumerate(line):
+                if c == "." or c == "#":
+                    continue
+                else:
+                    blizzards.add(((x, height), Direction(c)))
+        height += 1
     return start, end, Grid(width, height, blizzards)
 
 
 def main1() -> int:
-    start, end, grid = parse_input()
+    start, end, grid = parse_data()
     return grid.move(start, end)
 
 
 def main2() -> int:
-    start, end, grid = parse_input()
+    start, end, grid = parse_data()
     return grid.move(start, end) + grid.move(end, start) + grid.move(start, end)

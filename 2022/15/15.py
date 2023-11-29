@@ -1,26 +1,25 @@
 import bisect
 import re
 
+from utils.parsing import parse_input
+
 Point = tuple[int, int]
 
 
-def parse_input() -> list[tuple[Point, Point]]:
+def parse_sensors() -> list[tuple[Point, Point]]:
     regex = re.compile(
         r"Sensor at x=(-?\d+), y=(-?\d+): closest beacon is at x=(-?\d+), y=(-?\d+)"
     )
     sensors: list[tuple[Point, Point]] = []
-    try:
-        while line := input().strip():
-            match = regex.match(line)
-            if not match:
-                break
+    for line in parse_input():
+        match = regex.match(line)
+        if not match:
+            break
 
-            groups = match.groups()
-            sensor = (int(groups[0]), int(groups[1]))
-            beacon = (int(groups[2]), int(groups[3]))
-            sensors.append((sensor, beacon))
-    except EOFError:
-        pass
+        groups = match.groups()
+        sensor = (int(groups[0]), int(groups[1]))
+        beacon = (int(groups[2]), int(groups[3]))
+        sensors.append((sensor, beacon))
     return sensors
 
 
@@ -73,14 +72,14 @@ def get_sensors_intervals(
 
 
 def main1() -> int:
-    data = parse_input()
+    data = parse_sensors()
     target_y = 2_000_000
     intervals = get_sensors_intervals(data, target_y)
     return sum(x_max - x_min for x_min, x_max in intervals)
 
 
 def main2() -> int:
-    data = parse_input()
+    data = parse_sensors()
     x_min = 0
     x_max = y_max = 4_000_000
 

@@ -1,6 +1,8 @@
 from collections import defaultdict
 from collections.abc import Callable
 
+from utils.parsing import parse_input
+
 
 def evaluate_condition(registers: dict[str, int], condition: str) -> bool:
     register, operator, value = condition.split()
@@ -27,25 +29,19 @@ def evaluate_operation(registers: dict[str, int], operation: str) -> int:
 
 def main1() -> int:
     registers: dict[str, int] = defaultdict(int)
-    try:
-        while line := input().strip():
-            operation, condition = line.split(" if ")
-            if evaluate_condition(registers, condition):
-                evaluate_operation(registers, operation)
-    except EOFError:
-        pass
+    for line in parse_input():
+        operation, condition = line.split(" if ")
+        if evaluate_condition(registers, condition):
+            evaluate_operation(registers, operation)
     return max(registers.values())
 
 
 def main2() -> int:
     registers: dict[str, int] = defaultdict(int)
     response = 0
-    try:
-        while line := input().strip():
-            operation, condition = line.split(" if ")
-            if evaluate_condition(registers, condition):
-                value = evaluate_operation(registers, operation)
-                response = max(response, value)
-    except EOFError:
-        pass
+    for line in parse_input():
+        operation, condition = line.split(" if ")
+        if evaluate_condition(registers, condition):
+            value = evaluate_operation(registers, operation)
+            response = max(response, value)
     return response

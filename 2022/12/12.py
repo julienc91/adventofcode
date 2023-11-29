@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Node:
@@ -8,7 +10,7 @@ class Node:
     links: list["Node"] = field(default_factory=list)
 
 
-def parse_input() -> (
+def parse_data() -> (
     tuple[dict[tuple[int, int], Node], tuple[int, int], tuple[int, int]]
 ):
     nodes_by_id: dict[tuple[int, int], Node] = {}
@@ -16,21 +18,18 @@ def parse_input() -> (
     finish = (0, 0)
     y = 0
 
-    try:
-        while line := input().strip():
-            for x, level in enumerate(line):
-                if level == "S":
-                    level = "a"
-                    start = (x, y)
-                elif level == "E":
-                    level = "z"
-                    finish = (x, y)
+    for line in parse_input():
+        for x, level in enumerate(line):
+            if level == "S":
+                level = "a"
+                start = (x, y)
+            elif level == "E":
+                level = "z"
+                finish = (x, y)
 
-                node = Node(id=(x, y), level=ord(level))
-                nodes_by_id[(x, y)] = node
-            y += 1
-    except EOFError:
-        pass
+            node = Node(id=(x, y), level=ord(level))
+            nodes_by_id[(x, y)] = node
+        y += 1
 
     for node in nodes_by_id.values():
         x, y = node.id
@@ -64,12 +63,12 @@ def shortest_path(root_node: Node, target_node: Node) -> int:
 
 
 def main1() -> int:
-    nodes, start, finish = parse_input()
+    nodes, start, finish = parse_data()
     return shortest_path(nodes[start], nodes[finish])
 
 
 def main2() -> int:
-    nodes, _, finish = parse_input()
+    nodes, _, finish = parse_data()
     shortest_path_length = len(nodes)
     for node in nodes.values():
         if node.level != ord("a"):

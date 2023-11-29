@@ -1,6 +1,8 @@
 import heapq
 from dataclasses import dataclass
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Node:
@@ -58,15 +60,10 @@ def make_tiling(
 def parse_graph(tiling: int) -> tuple[Node, Node]:
     nodes_by_coordinates = {}
     y = 0
-    try:
-        while line := input().strip():
-            for x, w in enumerate(line):
-                nodes_by_coordinates[(x, y)] = Node(
-                    x=x, y=y, weight=int(w), links=set()
-                )
-            y += 1
-    except EOFError:
-        pass
+    for line in parse_input():
+        for x, w in enumerate(line):
+            nodes_by_coordinates[(x, y)] = Node(x=x, y=y, weight=int(w), links=set())
+        y += 1
 
     base_grid_size = y
     make_tiling(base_grid_size, nodes_by_coordinates, tiling)

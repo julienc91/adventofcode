@@ -1,16 +1,16 @@
-def parse_input() -> dict[int, int]:
+from utils.parsing import parse_input
+
+
+def parse_layers() -> dict[int, int]:
     layers: dict[int, int] = {}
-    try:
-        while line := input().strip():
-            depth, range_ = map(int, line.split(": "))
-            layers[depth] = range_
-    except EOFError:
-        pass
+    for line in parse_input():
+        depth, range_ = map(int, line.split(": "))
+        layers[depth] = range_
     return layers
 
 
 def main1() -> int:
-    layers = parse_input()
+    layers = parse_layers()
     caught = []
     max_depth = max(layers.keys())
     for depth in range(max_depth + 1):
@@ -24,7 +24,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    layers = parse_input()
+    layers = parse_layers()
     max_depth = max(layers.keys())
     delay = 0
     while True:

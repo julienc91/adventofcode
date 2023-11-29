@@ -1,5 +1,7 @@
 from collections import Counter
 
+from utils.parsing import parse_input
+
 
 def parse_formula() -> str:
     line = input().strip()
@@ -9,12 +11,9 @@ def parse_formula() -> str:
 
 def parse_transformations() -> dict[tuple[str, str], str]:
     res = {}
-    try:
-        while line := input().strip():
-            a, b = line.split(" -> ")
-            res[(a[0], a[1])] = b
-    except EOFError:
-        pass
+    for line in parse_input():
+        a, b = line.split(" -> ")
+        res[(a[0], a[1])] = b
     return res
 
 

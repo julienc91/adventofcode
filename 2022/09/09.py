@@ -1,3 +1,6 @@
+from utils.parsing import parse_input
+
+
 def is_neighbour(head: tuple[int, int], tail: tuple[int, int]) -> bool:
     x1, y1 = head
     x2, y2 = tail
@@ -20,22 +23,19 @@ def move_tail(head: tuple[int, int], tail: tuple[int, int]) -> tuple[int, int]:
 def _main(rope_length: int) -> int:
     rope: list[tuple[int, int]] = [(0, 0) for _ in range(rope_length)]
     visited: set[tuple[int, int]] = {rope[-1]}
-    try:
-        while line := input().strip():
-            xh, yh = rope[0]
-            direction, count = line.split()
-            for _ in range(int(count)):
-                if direction in {"U", "D"}:
-                    yh += 1 if direction == "U" else -1
-                else:
-                    xh += 1 if direction == "R" else -1
-                rope[0] = (xh, yh)
+    for line in parse_input():
+        xh, yh = rope[0]
+        direction, count = line.split()
+        for _ in range(int(count)):
+            if direction in {"U", "D"}:
+                yh += 1 if direction == "U" else -1
+            else:
+                xh += 1 if direction == "R" else -1
+            rope[0] = (xh, yh)
 
-                for i in range(rope_length - 1):
-                    rope[i + 1] = move_tail(rope[i], rope[i + 1])
-                visited.add(rope[-1])
-    except EOFError:
-        pass
+            for i in range(rope_length - 1):
+                rope[i + 1] = move_tail(rope[i], rope[i + 1])
+            visited.add(rope[-1])
     return len(visited)
 
 

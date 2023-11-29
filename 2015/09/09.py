@@ -2,6 +2,8 @@ import re
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 
+from utils.parsing import parse_input
+
 
 @dataclass
 class Node:
@@ -15,22 +17,18 @@ class Node:
 def build_graph() -> dict[str, Node]:
     graph = {}
     regex = re.compile(r"(\w+) to (\w+) = (\d+)")
-    try:
-        while line := input().strip():
-            match = regex.search(line)
-            assert match
-            a, b, d = match.group(1), match.group(2), int(match.group(3))
+    for line in parse_input():
+        match = regex.search(line)
+        assert match
+        a, b, d = match.group(1), match.group(2), int(match.group(3))
 
-            if a not in graph:
-                graph[a] = Node(name=a, neighbours=[])
-            if b not in graph:
-                graph[b] = Node(name=b, neighbours=[])
+        if a not in graph:
+            graph[a] = Node(name=a, neighbours=[])
+        if b not in graph:
+            graph[b] = Node(name=b, neighbours=[])
 
-            graph[a].neighbours.append((graph[b], d))
-            graph[b].neighbours.append((graph[a], d))
-
-    except EOFError:
-        pass
+        graph[a].neighbours.append((graph[b], d))
+        graph[b].neighbours.append((graph[a], d))
     return graph
 
 
