@@ -7,6 +7,7 @@ import pytest
 from cli.utils.puzzle import run_puzzle_func
 
 EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
+    2023: [(1, (54951, 55218))],
     2022: [
         (1, (67633, 199628)),
         (2, (10624, 14060)),
