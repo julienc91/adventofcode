@@ -1,10 +1,6 @@
 from utils.parsing import parse_input
 
 
-def parse_containers() -> list[int]:
-    return [int(line) for line in parse_input()]
-
-
 def get_combinations(containers: list[int], total: int) -> set[tuple[int, ...]]:
     containers = sorted(containers, reverse=True)
     named_containers = [(i, c) for i, c in enumerate(containers, start=1)]
@@ -32,14 +28,14 @@ def get_combinations(containers: list[int], total: int) -> set[tuple[int, ...]]:
 
 def main1() -> int:
     total = 150
-    containers = parse_containers()
+    containers = list(parse_input(int))
     combinations = get_combinations(containers, total)
     return len(combinations)
 
 
 def main2() -> int:
     total = 150
-    containers = parse_containers()
+    containers = list(parse_input(int))
     combinations = get_combinations(containers, total)
 
     min_size = len(containers)

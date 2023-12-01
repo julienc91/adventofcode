@@ -40,7 +40,7 @@ def find_grove_coordinates(data: list[int]) -> int:
 
 
 def main1() -> int:
-    data = [int(line) for line in parse_input()]
+    data = list(parse_input(int))
     mixer = Mixer(data)
 
     mix_result = mixer.mix()
@@ -48,7 +48,7 @@ def main1() -> int:
 
 
 def main2() -> int:
-    data = [int(line) for line in parse_input()]
+    data = list(parse_input(int))
     decryption_key = 811589153
     data = list(map(lambda n: n * decryption_key, data))
 

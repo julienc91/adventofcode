@@ -5,10 +5,6 @@ from collections.abc import Iterator
 from utils.parsing import parse_input
 
 
-def parse_weights() -> list[int]:
-    return [int(line) for line in parse_input()]
-
-
 def get_groups_of_weight(weights: list[int], target: int) -> Iterator[tuple[int, ...]]:
     for group_size in range(len(weights)):
         for group in itertools.combinations(weights, group_size):
@@ -32,7 +28,7 @@ def validate_grouping(weights: list[int], target: int, nb_groups: int) -> bool:
 
 
 def _main(nb_groups: int) -> int:
-    weights = parse_weights()
+    weights = list(parse_input(int))
     total = sum(weights)
     assert total % nb_groups == 0
     target = total // nb_groups
