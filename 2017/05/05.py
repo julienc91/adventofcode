@@ -3,13 +3,9 @@ from collections.abc import Callable
 from utils.parsing import parse_input
 
 
-def parse_instructions() -> list[int]:
-    return [int(line) for line in parse_input()]
-
-
 def _main(increment: Callable[[int], int]) -> int:
     index, counter = 0, 0
-    instructions = parse_instructions()
+    instructions = list(parse_input(int))
     try:
         while True:
             value = instructions[index]
