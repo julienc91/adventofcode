@@ -79,6 +79,7 @@ EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
         (14, (8230, 1103)),
         (15, (573, 294)),
         (16, ("jcobhadfnmpkglie", "pclhmengojfdkaib")),
+        (17, (1311, 39170601)),
     ],
     2016: [
         (1, (230, 154)),
