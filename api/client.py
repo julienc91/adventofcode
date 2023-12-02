@@ -1,5 +1,6 @@
-from pathlib import Path
 import os
+from pathlib import Path
+
 import appdirs
 import httpx
 from bs4 import BeautifulSoup

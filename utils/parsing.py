@@ -1,6 +1,5 @@
-from typing import TypeVar
 from collections.abc import Iterator
-
+from typing import TypeVar
 
 T = TypeVar("T")
 

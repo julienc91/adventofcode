@@ -1,8 +1,8 @@
-import re
 import math
+import re
+from enum import Enum
 
 from utils.parsing import parse_input
-from enum import Enum
 
 
 class Colors(Enum):
