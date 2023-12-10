@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 import click
@@ -37,14 +37,19 @@ def validate_date(day: int | None, year: int | None) -> date:
 @puzzle.command()
 @click.option("--day", default=None, type=int)
 @click.option("--year", default=None, type=int)
-def run(day: int | None, year: int | None) -> None:
+@click.option("--timer", default=False, is_flag=True)
+def run(day: int | None, year: int | None, timer: bool) -> None:
     puzzle_date = validate_date(day, year)
 
-    result = run_puzzle_func(puzzle_date.year, puzzle_date.day, "main1")
-    click.echo(f"main1: {result}")
+    for func_name in ("main1", "main2"):
+        t0 = datetime.now()
+        result = run_puzzle_func(puzzle_date.year, puzzle_date.day, func_name)
+        t1 = datetime.now()
 
-    result = run_puzzle_func(puzzle_date.year, puzzle_date.day, "main2")
-    click.echo(f"main2: {result}")
+        message = f"{func_name}: {result}"
+        if timer:
+            message += f" ({t1 - t0})"
+        click.echo(message)
 
 
 @puzzle.command()
