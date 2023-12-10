@@ -1,12 +1,6 @@
 from collections.abc import Iterator
-from enum import Enum
 
-
-class Direction(Enum):
-    RIGHT = 1
-    UP = 2
-    LEFT = 3
-    DOWN = 4
+from utils.enums import Direction
 
 
 def iterate_spiral() -> Iterator[tuple[int, int]]:
@@ -21,16 +15,16 @@ def iterate_spiral() -> Iterator[tuple[int, int]]:
             case Direction.RIGHT:
                 x += 1
                 if x == spiral_number:
-                    direction = Direction.UP
-            case Direction.UP:
+                    direction = Direction.TOP
+            case Direction.TOP:
                 y += 1
                 if y == spiral_number:
                     direction = Direction.LEFT
             case Direction.LEFT:
                 x -= 1
                 if x == -spiral_number:
-                    direction = Direction.DOWN
-            case Direction.DOWN:
+                    direction = Direction.BOTTOM
+            case Direction.BOTTOM:
                 y -= 1
                 if y == -spiral_number:
                     direction = Direction.RIGHT

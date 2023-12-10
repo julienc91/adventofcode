@@ -1,14 +1,7 @@
 from collections.abc import Iterator
-from enum import Enum
 
+from utils.enums import Direction
 from utils.parsing import parse_input
-
-
-class Direction(Enum):
-    TOP = 0
-    RIGHT = 1
-    BOTTOM = 2
-    LEFT = 3
 
 
 def find_next_step(
@@ -17,19 +10,7 @@ def find_next_step(
     x, y = position
 
     def inner(direction: Direction) -> tuple[int, int] | None:
-        match direction:
-            case Direction.TOP:
-                next_cell = (x, y - 1)
-            case Direction.RIGHT:
-                next_cell = (x + 1, y)
-            case Direction.BOTTOM:
-                next_cell = (x, y + 1)
-            case Direction.LEFT:
-                next_cell = (x - 1, y)
-            case _:
-                raise ValueError(f"Unexpected direction {direction}")
-
-        x2, y2 = next_cell
+        next_cell = (x2, y2) = direction.move(x, y)
         if x2 < 0 or y2 < 0 or y2 >= len(grid) or x2 >= len(grid[y2]):
             return None
 
@@ -41,8 +22,7 @@ def find_next_step(
     directions_to_try = [current_direction] + [
         direction
         for direction in Direction
-        if direction != current_direction
-        and (current_direction.value + 2) % 4 != direction.value
+        if direction not in (current_direction, current_direction.opposite)
     ]
     for direction_to_try in directions_to_try:
         next_position = inner(direction_to_try)
