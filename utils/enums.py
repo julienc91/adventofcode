@@ -9,17 +9,41 @@ class Direction(Enum):
 
     @property
     def opposite(self) -> "Direction":
-        return {
-            Direction.TOP: Direction.BOTTOM,
-            Direction.RIGHT: Direction.LEFT,
-            Direction.BOTTOM: Direction.TOP,
-            Direction.LEFT: Direction.RIGHT,
-        }[self]
+        if self == Direction.TOP:
+            return Direction.BOTTOM
+        elif self == Direction.RIGHT:
+            return Direction.LEFT
+        elif self == Direction.BOTTOM:
+            return Direction.TOP
+        else:
+            return Direction.RIGHT
 
     def move(self, x: int, y: int) -> tuple[int, int]:
-        return {
-            Direction.TOP: (x, y - 1),
-            Direction.RIGHT: (x + 1, y),
-            Direction.BOTTOM: (x, y + 1),
-            Direction.LEFT: (x - 1, y),
-        }[self]
+        if self == Direction.TOP:
+            return x, y - 1
+        elif self == Direction.RIGHT:
+            return x + 1, y
+        elif self == Direction.BOTTOM:
+            return x, y + 1
+        else:
+            return x - 1, y
+
+    def turn_right(self) -> "Direction":
+        if self == Direction.TOP:
+            return Direction.RIGHT
+        elif self == Direction.RIGHT:
+            return Direction.BOTTOM
+        elif self == Direction.BOTTOM:
+            return Direction.LEFT
+        else:
+            return Direction.TOP
+
+    def turn_left(self) -> "Direction":
+        if self == Direction.TOP:
+            return Direction.LEFT
+        elif self == Direction.RIGHT:
+            return Direction.TOP
+        elif self == Direction.BOTTOM:
+            return Direction.RIGHT
+        else:
+            return Direction.BOTTOM
