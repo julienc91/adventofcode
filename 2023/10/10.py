@@ -18,13 +18,7 @@ def _solve_for_start_type(
     expected_final_direction = directions_by_pipe_type[start_type][1].opposite
     path = [start]
     while True:
-        x, y = {
-            Direction.TOP: (x, y - 1),
-            Direction.BOTTOM: (x, y + 1),
-            Direction.LEFT: (x - 1, y),
-            Direction.RIGHT: (x + 1, y),
-        }[direction]
-
+        x, y = direction.move(x, y)
         if not (0 <= y < len(grid) and 0 <= x < len(grid[y])):
             return None
 
