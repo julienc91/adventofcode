@@ -1,4 +1,3 @@
-import itertools
 from collections.abc import Iterator
 
 from utils.parsing import parse_input
@@ -9,16 +8,14 @@ def tilt(
     cube_rocks: set[tuple[int, int]],
 ) -> set[tuple[int, int]]:
     stuck_rocks = set()
-    while round_rocks:
-        x, y = round_rocks.pop()
-        if y == 0:
-            stuck_rocks.add((x, y))
-        elif (x, y - 1) in round_rocks:
-            round_rocks.add((x, y))
-        elif (x, y - 1) in stuck_rocks or (x, y - 1) in cube_rocks:
-            stuck_rocks.add((x, y))
-        else:
-            round_rocks.add((x, y - 1))
+    sorted_round_rocks = sorted(round_rocks)
+    while sorted_round_rocks:
+        x, y = sorted_round_rocks.pop(0)
+        while y > 0:
+            if (x, y - 1) in stuck_rocks or (x, y - 1) in cube_rocks:
+                break
+            y -= 1
+        stuck_rocks.add((x, y))
     return stuck_rocks
 
 
@@ -46,14 +43,20 @@ def rotate_coordinates(x: int, y: int, max_x: int) -> tuple[int, int]:
 
 def iterate_load_score(grid: list[str]) -> Iterator[set[tuple[int, int]]]:
     round_rocks, cube_rocks = get_rocks_positions(grid)
-    max_x_in_rotation = itertools.cycle([len(grid), len(grid[0])])
+    max_x = len(grid) - 1
+    assert max_x == len(grid[0]) - 1
+
+    # Pre-compute rotations of cube rocks
+    rotated_cube_rocks = [cube_rocks]
+    for _ in range(3):
+        rotated_cube_rocks.append({(max_x - y, x) for x, y in rotated_cube_rocks[-1]})
 
     while True:
-        for _ in range(4):
-            max_x = next(max_x_in_rotation)
+        for i in range(4):
+            cube_rocks = rotated_cube_rocks[i]
             round_rocks = tilt(round_rocks, cube_rocks)
-            round_rocks = {rotate_coordinates(x, y, max_x - 1) for x, y in round_rocks}
-            cube_rocks = {rotate_coordinates(x, y, max_x - 1) for x, y in cube_rocks}
+            # Rotate coordinates of round rocks
+            round_rocks = {(max_x - y, x) for x, y in round_rocks}
         yield round_rocks
 
 
