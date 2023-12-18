@@ -18,15 +18,15 @@ class Direction(Enum):
         else:
             return Direction.RIGHT
 
-    def move(self, x: int, y: int) -> tuple[int, int]:
+    def move(self, x: int, y: int, /, steps: int = 1) -> tuple[int, int]:
         if self == Direction.TOP:
-            return x, y - 1
+            return x, y - steps
         elif self == Direction.RIGHT:
-            return x + 1, y
+            return x + steps, y
         elif self == Direction.BOTTOM:
-            return x, y + 1
+            return x, y + steps
         else:
-            return x - 1, y
+            return x - steps, y
 
     def turn_right(self) -> "Direction":
         if self == Direction.TOP:
