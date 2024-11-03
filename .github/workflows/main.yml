@@ -18,7 +18,7 @@ jobs:
           uv sync --extra tests
           source .venv/bin/activate
       - name: Run test suite
-        run: pytest -n auto -W error -v .
+        run: uv run pytest -n auto -W error -v .
 
   lint:
     runs-on: ubuntu-latest
@@ -56,4 +56,4 @@ jobs:
           uv sync --extra tests
           source .venv/bin/activate
       - name: Run pyright
-        run: pyright
+        run: uv run pyright
