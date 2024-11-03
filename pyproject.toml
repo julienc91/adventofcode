@@ -23,5 +23,5 @@ tests = [
 [tool.pyright]
 reportIncompatibleMethodOverride = false
 
-[tool.ruff]
+[tool.ruff.lint]
 extend-select = ["I"]
