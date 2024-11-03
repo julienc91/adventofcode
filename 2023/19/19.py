@@ -1,11 +1,11 @@
 import math
 import re
-from collections import namedtuple
+from typing import NamedTuple
 
 from utils.parsing import parse_input
 
 
-class Part(namedtuple("Part", ["x", "m", "a", "s"])):
+class Part(NamedTuple):
     x: int
     m: int
     a: int

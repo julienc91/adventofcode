@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 from typing import TypeVar
 
-T = TypeVar("T")
+T = TypeVar("T", str, int)
 
 
 def parse_input(type_: type[T] = str) -> Iterator[T]:
