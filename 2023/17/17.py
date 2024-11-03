@@ -1,13 +1,13 @@
 import heapq
-from collections import namedtuple
 from collections.abc import Iterator
 from functools import cache
+from typing import NamedTuple
 
 from utils.enums import Direction
 from utils.parsing import parse_input
 
 
-class State(namedtuple("State", ["position", "direction", "straight_count"])):
+class State(NamedTuple):
     position: tuple[int, int]
     direction: Direction
     straight_count: int

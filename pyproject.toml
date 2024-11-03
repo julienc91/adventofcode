@@ -20,5 +20,8 @@ tests = [
     "pyright~=1.1.337"
 ]
 
+[tool.pyright]
+reportIncompatibleMethodOverride = false
+
 [tool.ruff]
 extend-select = ["I"]
