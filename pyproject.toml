@@ -1,26 +1,24 @@
-[tool.poetry]
+[project]
 name = "adventofcode"
 version = "0.1.0"
 description = ""
 authors = ["Julien Chaumont"]
+requires-python = ">=3.13"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-appdirs = "^1.4.4"
-beautifulsoup4 = "^4.12.2"
-click = "^8.1.7"
-httpx = "^0.25.2"
+dependencies = [
+    "appdirs~=1.4.4",
+    "beautifulsoup4~=4.12.2",
+    "click~=8.1.7",
+    "httpx~=0.25.2"
+]
 
-[tool.poetry.group.dev.dependencies]
-pyright = "^1.1.337"
-pytest = "^7.4.3"
-pytest-benchmark = "^4.0.0"
-pytest-xdist = "^3.5.0"
-ruff = "^0.1.6"
+[project.optional-dependencies]
+tests = [
+    "pytest~=7.4.3",
+    "pytest-benchmark~=4.0.0",
+    "pytest-xdist~=3.5.0",
+    "pyright~=1.1.337"
+]
 
 [tool.ruff]
 extend-select = ["I"]
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
