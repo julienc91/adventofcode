@@ -39,7 +39,7 @@ def cratemover_9001(stacks: list[list[str]], instruction: tuple[int, int, int]) 
 
 
 def _main(
-    apply_instruction: Callable[[list[list[str]], tuple[int, int, int]], None]
+    apply_instruction: Callable[[list[list[str]], tuple[int, int, int]], None],
 ) -> str:
     stacks = parse_stacks()
     for instruction in parse_instructions():

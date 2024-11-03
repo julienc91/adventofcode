@@ -37,9 +37,9 @@ def make_sand(grid: dict[tuple[int, int], State], with_floor: bool) -> Iterator[
         x, y = 500, 0
         while y <= max_y:
             if with_floor:
-                grid[(x, max_y)] = grid[(x + 1, max_y)] = grid[
-                    (x - 1, max_y)
-                ] = State.ROCK
+                grid[(x, max_y)] = grid[(x + 1, max_y)] = grid[(x - 1, max_y)] = (
+                    State.ROCK
+                )
 
             if grid[(x, y + 1)] == State.AIR:
                 y += 1

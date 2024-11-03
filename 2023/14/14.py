@@ -20,7 +20,7 @@ def tilt(
 
 
 def get_rocks_positions(
-    grid: list[str]
+    grid: list[str],
 ) -> tuple[set[tuple[int, int]], set[tuple[int, int]]]:
     round_rocks = set()
     cube_rocks = set()

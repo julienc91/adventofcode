@@ -22,7 +22,7 @@ class Node:
 
 
 def create_links_between_nodes(
-    nodes_by_coordinates: dict[tuple[int, int], Node]
+    nodes_by_coordinates: dict[tuple[int, int], Node],
 ) -> None:
     for (x, y), node in nodes_by_coordinates.items():
         neighbours = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
