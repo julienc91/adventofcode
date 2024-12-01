@@ -163,6 +163,9 @@ EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
         (24, (10439961859, 72050269)),
         (25, (2650453, -1)),
     ],
+    2024: [
+        (1, (1873376, 18997088)),
+    ],
 }
 
 TEST_PARAMETERS = [
