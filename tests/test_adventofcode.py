@@ -7,6 +7,10 @@ import pytest
 from cli.utils.puzzle import run_puzzle_func
 
 EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
+    2024: [
+        (1, (1873376, 18997088)),
+        (2, (224, 293)),
+    ],
     2023: [
         (1, (54951, 55218)),
         (2, (2593, 54699)),
@@ -162,9 +166,6 @@ EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
         (23, (170, 247)),
         (24, (10439961859, 72050269)),
         (25, (2650453, -1)),
-    ],
-    2024: [
-        (1, (1873376, 18997088)),
     ],
 }
 
