@@ -1,4 +1,5 @@
-from datetime import date, datetime
+import time
+from datetime import date
 from pathlib import Path
 
 import click
@@ -42,13 +43,13 @@ def run(day: int | None, year: int | None, timer: bool) -> None:
     puzzle_date = validate_date(day, year)
 
     for func_name in ("main1", "main2"):
-        t0 = datetime.now()
+        t0 = time.perf_counter()
         result = run_puzzle_func(puzzle_date.year, puzzle_date.day, func_name)
-        t1 = datetime.now()
+        t1 = time.perf_counter()
 
         message = f"{func_name}: {result}"
         if timer:
-            message += f" ({t1 - t0})"
+            message += f" ({t1 - t0:.3f}s)"
         click.echo(message)
 
 
