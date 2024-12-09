@@ -1,3 +1,4 @@
+import bisect
 from collections.abc import Callable
 
 Disk = list[tuple[int | None, int]]
@@ -48,46 +49,76 @@ def defragment_v1(disk: Disk) -> Disk:
 
 
 def defragment_v2(disk: Disk) -> Disk:
-    min_left_idx = 0
-    left_idx = min_left_idx
     right_idx = len(disk) - 1
     max_file_size = len(disk)
 
-    while min_left_idx <= left_idx < right_idx:
-        if disk[left_idx][0] is not None:
-            if min_left_idx == left_idx:
-                min_left_idx += 1
-            left_idx += 1
-        elif disk[right_idx][0] is None:
-            right_idx -= 1
-        else:
-            file_id, file_size = disk[right_idx]
-            if max_file_size is not None and file_size >= max_file_size:
-                right_idx -= 1
-            elif disk[left_idx][1] == file_size:
-                disk[left_idx] = (file_id, file_size)
-                disk[right_idx] = (None, file_size)
-                left_idx = min_left_idx
-            elif disk[left_idx][1] > file_size:
-                free_space = disk[left_idx][1]
-                disk[left_idx] = (file_id, file_size)
-                disk[right_idx] = (None, file_size)
-                disk.insert(left_idx + 1, (None, free_space - file_size))
-                left_idx = min_left_idx
-            else:
-                left_idx += 1
+    free_space_ranges = [
+        (i, size) for i, (file_type, size) in enumerate(disk) if file_type is None
+    ]
 
-            if left_idx >= right_idx:
+    while right_idx > 0:
+        if disk[right_idx][0] is None:
+            right_idx -= 1
+            continue
+
+        file_id, file_size = disk[right_idx]
+        if max_file_size is not None and file_size >= max_file_size:
+            right_idx -= 1
+            continue
+
+        for i, (free_space_idx, size) in enumerate(free_space_ranges):
+            if free_space_idx >= right_idx:
                 max_file_size = min(file_size, max_file_size or file_size)
+                break
 
-        if left_idx >= right_idx:
-            right_idx -= 1
-            left_idx = min_left_idx
+            if size >= file_size:
+                disk[free_space_idx] = (file_id, file_size)
+                disk[right_idx] = (None, file_size)
+                if size > file_size:
+                    disk.insert(free_space_idx + 1, (None, size - file_size))
+                    right_idx += 1
 
-    for i, c in disk:
-        assert c > 0
+                _fill_free_space(free_space_ranges, i, file_size)
+                _insert_free_space(free_space_ranges, right_idx, file_size)
+                break
+
+        right_idx -= 1
 
     return disk
+
+
+def _fill_free_space(
+    free_space_ranges: list[tuple[int, int]], idx: int, size: int
+) -> None:
+    free_space_idx, free_space_size = free_space_ranges[idx]
+    if free_space_size > size:
+        free_space_ranges[idx] = (free_space_idx + 1, free_space_size - size)
+        # shift all following indexes by 1
+        for i in range(idx + 1, len(free_space_ranges)):
+            free_space_ranges[i] = (
+                free_space_ranges[i][0] + 1,
+                free_space_ranges[i][1],
+            )
+    elif free_space_size == size:
+        free_space_ranges.pop(idx)
+    else:
+        raise RuntimeError("Not enough space to insert at this index")
+
+
+def _insert_free_space(
+    free_space_ranges: list[tuple[int, int]], idx: int, size: int
+) -> None:
+    k = bisect.bisect_left(free_space_ranges, (idx, size))
+    if k < len(free_space_ranges) - 1 and free_space_ranges[k + 1][0] == idx + 1:
+        # Merge with next free_space range if contiguous
+        size += free_space_ranges[k + 1][1]
+        free_space_ranges.pop(k + 1)
+    if k > 0 and free_space_ranges[k - 1][0] == idx - 1:
+        # Merge with previous free_space range if contiguous
+        size += free_space_ranges[k - 1][1]
+        free_space_ranges.pop(k - 1)
+        k -= 1
+    free_space_ranges.insert(k, (idx, size))
 
 
 def checksum(disk: Disk) -> int:
