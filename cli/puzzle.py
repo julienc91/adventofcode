@@ -59,16 +59,16 @@ def run(day: int | None, year: int | None, timer: bool) -> None:
 def init(day: int | None, year: int | None) -> None:
     puzzle_date = validate_date(day, year)
     puzzle_directory = Path(str(puzzle_date.year)) / f"{puzzle_date.day:02d}"
-    input_directory = Path("inputs") / str(puzzle_date.year) / f"{puzzle_date.day:02d}"
+    input_directory = Path("inputs") / str(puzzle_date.year)
 
-    if puzzle_directory.exists() or input_directory.exists():
+    if puzzle_directory.exists():
         raise click.ClickException("Directory already exists")
 
     puzzle_directory.mkdir(parents=True, exist_ok=False)
-    input_directory.mkdir(parents=True, exist_ok=False)
+    input_directory.mkdir(parents=True, exist_ok=True)
     try:
         input_data = aoc_client.puzzle.get_input(puzzle_date.year, puzzle_date.day)
-        (input_directory / "input").write_text(input_data)
+        (input_directory / f"{puzzle_date.day:02d}").write_text(input_data)
         (puzzle_directory / f"{puzzle_date.day:02d}.py").write_text(PUZZLE_TEMPLATE)
     except Exception:
         puzzle_directory.rmdir()

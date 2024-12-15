@@ -21,7 +21,7 @@ def get_puzzle_module(year: int, day: int) -> ModuleType:
 
 
 def get_puzzle_input(year: int, day: int) -> str:
-    input_file = Path(f"inputs/{year:02d}") / Path(f"{day:02d}") / Path("input")
+    input_file = Path(f"inputs/{year:02d}") / Path(f"{day:02d}")
     return input_file.read_text()
 
 
