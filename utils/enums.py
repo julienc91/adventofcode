@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class Direction(Enum):
+class Direction(StrEnum):
     TOP = "top"
     RIGHT = "right"
     BOTTOM = "bottom"
