@@ -4,6 +4,7 @@ from collections.abc import Iterator
 from functools import cache
 
 from utils.enums import Direction
+from utils.graph import get_shortest_path
 from utils.parsing import parse_input
 
 Grid = tuple[str, ...]
@@ -18,27 +19,27 @@ def parse_grid() -> Grid:
 @cache
 def get_min_weight(grid: Grid) -> int:
     start = (1, len(grid) - 2, Direction.RIGHT)
-    x, y, _ = start
-    queue: list[tuple[int, Position]] = [(0, start)]
-    visited: set[Position] = {start}
+    end = (len(grid[1]) - 2, 1)
 
-    while queue:
-        weight, (x, y, direction) = heapq.heappop(queue)
-        if grid[y][x] == "E":
-            return weight
-
+    def get_neighbours(
+        position: Position, weight: int
+    ) -> Iterator[tuple[int, Position]]:
+        x, y, direction = position
         x2, y2 = direction.move(x, y)
         next_position = (x2, y2, direction)
-        if grid[y2][x2] != "#" and next_position not in visited:
-            visited.add(next_position)
-            heapq.heappush(queue, (weight + 1, next_position))
+        if grid[y2][x2] != "#":
+            yield weight + 1, next_position
 
         for turn in (direction.turn_left(), direction.turn_right()):
             next_position = (x, y, turn)
-            if next_position not in visited:
-                visited.add(next_position)
-                heapq.heappush(queue, (weight + 1_000, next_position))
-    raise RuntimeError("Could not find a path")
+            yield weight + 1_000, next_position
+
+    def is_over(position: Position) -> bool:
+        x, y, _ = position
+        return (x, y) == end
+
+    weight, _ = get_shortest_path(start, get_neighbours, is_over)
+    return weight
 
 
 def get_all_shortest_paths(grid: Grid) -> Iterator[tuple[int, tuple[Point, ...]]]:

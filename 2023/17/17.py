@@ -1,9 +1,9 @@
-import heapq
 from collections.abc import Iterator
 from functools import cache
 from typing import NamedTuple
 
 from utils.enums import Direction
+from utils.graph import get_shortest_path
 from utils.parsing import parse_input
 
 
@@ -59,27 +59,12 @@ class UltraCrucible(Crucible):
     max_straight_count = 10
 
 
-def shortest_path(
-    grid,
-    start: tuple[int, int],
-    end: tuple[int, int],
-    crucible_klass: type[Crucible],
-):
-    state = State(start, Direction.RIGHT, 0)
-    count = 0
-    queue: list[tuple[int, int, State]] = [(0, count, state)]
-    visited = set()
+def _main(crucible_klass: type[Crucible]) -> int:
+    grid = list(list(map(int, line)) for line in parse_input())
+    end = (len(grid[-1]) - 1, len(grid) - 1)
 
-    while queue:
-        distance, _, state = heapq.heappop(queue)
-        if state.position == end and crucible_klass.can_be_final_state(state):
-            return distance
-
+    def get_neighbours(state: State, distance: int) -> Iterator[tuple[int, State]]:
         for next_state in crucible_klass.get_next_states(state):
-            if next_state in visited:
-                continue
-
-            visited.add(next_state)
             x, y = next_state.position
 
             try:
@@ -87,18 +72,17 @@ def shortest_path(
             except IndexError:
                 continue
 
-            count += 1
-            next_distance = distance + value
-            heapq.heappush(queue, (next_distance, count, next_state))
+            yield distance + value, next_state
 
-    raise RuntimeError()
-
-
-def _main(crucible_klass: type[Crucible]) -> int:
-    grid = list(list(map(int, line)) for line in parse_input())
-    return shortest_path(
-        grid, (0, 0), (len(grid[-1]) - 1, len(grid) - 1), crucible_klass
+    weight, _ = get_shortest_path(
+        State((0, 0), Direction.RIGHT, 0),
+        get_neighbours=get_neighbours,
+        is_over=(
+            lambda state: state.position == end
+            and crucible_klass.can_be_final_state(state)
+        ),
     )
+    return weight
 
 
 def main1() -> int:

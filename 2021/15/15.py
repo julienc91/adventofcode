@@ -1,6 +1,7 @@
-import heapq
+from collections.abc import Iterator
 from dataclasses import dataclass
 
+from utils.graph import get_shortest_path
 from utils.parsing import parse_input
 
 
@@ -73,29 +74,24 @@ def parse_graph(tiling: int) -> tuple[Node, Node]:
     return nodes_by_coordinates[(0, 0)], nodes_by_coordinates[(grid_size, grid_size)]
 
 
-def shortest_path(root_node: Node, target_node: Node) -> int:
-    queue: list[tuple[int, Node]] = [(0, root_node)]
-    visited = set()
-    while queue:
-        cost, node = heapq.heappop(queue)
-        if node in visited:
-            continue
+def _main(tiling: int) -> int:
+    root_node, target_node = parse_graph(tiling=tiling)
 
-        visited.add(node)
-        if node == target_node:
-            return cost
-
+    def get_neighbours(node: Node, cost: int) -> Iterator[tuple[int, Node]]:
         for neighbour in node.links:
-            if neighbour not in visited:
-                heapq.heappush(queue, (cost + neighbour.weight, neighbour))
-    return -1
+            yield cost + neighbour.weight, neighbour
+
+    weight, _ = get_shortest_path(
+        root_node,
+        get_neighbours=get_neighbours,
+        is_over=lambda node: node == target_node,
+    )
+    return weight
 
 
 def main1() -> int:
-    root_node, target_node = parse_graph(tiling=1)
-    return shortest_path(root_node, target_node)
+    return _main(1)
 
 
 def main2() -> int:
-    root_node, target_node = parse_graph(tiling=5)
-    return shortest_path(root_node, target_node)
+    return _main(5)
