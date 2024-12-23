@@ -30,6 +30,7 @@ EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
         (20, (1463, 985332)),
         (21, (109758, 134341709499296)),
         (22, (19927218456, 2189)),
+        (23, (1306, "bd,dk,ir,ko,lk,nn,ob,pt,te,tl,uh,wj,yl")),
     ],
     2023: [
         (1, (54951, 55218)),
