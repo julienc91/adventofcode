@@ -15,7 +15,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest~=8.3.3",
-    "pytest-benchmark~=5.1.0",
+    "pytest-benchmark~=5.2.0",
     "pytest-xdist~=3.8.0",
     "pyright~=1.1.337"
 ]
