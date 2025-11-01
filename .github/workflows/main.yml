@@ -23,9 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          uv venv
-          uv sync --extra tests
-          source .venv/bin/activate
+          uv sync
       - name: Run test suite
         run: uv run pytest -n auto -W error -v .
 
@@ -41,9 +39,7 @@ jobs:
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          uv venv
-          uv sync --extra tests
-          source .venv/bin/activate
+          uv sync
       - name: Run ruff check
         run: uvx ruff check .
       - name: Run ruff format
@@ -61,8 +57,6 @@ jobs:
       - name: Install dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          uv venv
-          uv sync --extra tests
-          source .venv/bin/activate
+          uv sync
       - name: Run pyright
         run: uv run pyright
