@@ -23,5 +23,8 @@ dev = [
 [tool.pyright]
 reportIncompatibleMethodOverride = false
 
+[tool.pytest.ini_options]
+addopts = "--benchmark-skip"
+
 [tool.ruff.lint]
 extend-select = ["I"]
