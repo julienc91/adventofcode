@@ -9,6 +9,7 @@ from cli.utils.puzzle import run_puzzle_func
 EXPECTED_RESULTS: dict[int, list[tuple[int, tuple[int | str, int | str]]]] = {
     2025: [
         (1, (1147, 6789)),
+        (2, (40398804950, 65794984339)),
     ],
     2024: [
         (1, (1873376, 18997088)),
