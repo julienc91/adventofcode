@@ -7,9 +7,19 @@ updates:
       cronjob: "0 0 * 12 *"
     cooldown:
       default-days: 7
+    open-pull-requests-limit: 4
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    versioning-strategy: "increase"
     groups:
       backend-dev-deps:
         dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -18,10 +28,19 @@ updates:
       cronjob: "0 0 * 12 *"
     cooldown:
       default-days: 7
+    open-pull-requests-limit: 4
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
     groups:
       gha-deps:
         patterns:
           - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "pre-commit"
     directory: "/"
@@ -30,7 +49,16 @@ updates:
       cronjob: "0 0 * 12 *"
     cooldown:
       default-days: 7
+    open-pull-requests-limit: 4
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
     groups:
       pre-commit-deps:
         patterns:
           - "*"
+        update-types:
+          - "minor"
+          - "patch"
