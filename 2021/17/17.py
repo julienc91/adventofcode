@@ -27,11 +27,11 @@ def is_target_hit(
         if is_in_target:
             return True
 
-        if x > x_range[1]:
-            return False
-        elif x < x_range[0] and x_velocity <= 0:
-            return False
-        elif y < y_range[0] and y_velocity <= 0:
+        if (
+            x > x_range[1]
+            or (x < x_range[0] and x_velocity <= 0)
+            or (y < y_range[0] and y_velocity <= 0)
+        ):
             return False
 
 
@@ -49,7 +49,7 @@ def main2() -> int:
     x_range, y_range = parse_input()
     max_y = get_max_y(y_range)
     count = 0
-    for x in range(0, x_range[1] + 1):
+    for x in range(x_range[1] + 1):
         for y in range(y_range[0], 2 * int(max_y**0.5)):
             if is_target_hit(x, y, x_range, y_range):
                 count += 1

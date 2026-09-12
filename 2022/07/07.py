@@ -20,14 +20,11 @@ def get_filesystem_size() -> dict[str, int]:
             else:
                 pwd.append(path)
 
-        elif line.startswith("$ "):
-            continue
-
-        elif line.startswith("dir "):
+        elif line.startswith(("$ ", "dir ")):
             continue
 
         else:
-            size, name = line.split(" ", 1)
+            size, _name = line.split(" ", 1)
             for i in range(len(pwd) + 1):
                 absolute_path = get_absolute_path(pwd[:i])
                 size_by_path[absolute_path] += int(size)

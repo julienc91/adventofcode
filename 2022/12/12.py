@@ -16,9 +16,8 @@ def parse_data() -> tuple[
     nodes_by_id: dict[tuple[int, int], Node] = {}
     start = (0, 0)
     finish = (0, 0)
-    y = 0
 
-    for line in parse_input():
+    for y, line in enumerate(parse_input()):
         for x, level in enumerate(line):
             if level == "S":
                 level = "a"
@@ -29,7 +28,6 @@ def parse_data() -> tuple[
 
             node = Node(id=(x, y), level=ord(level))
             nodes_by_id[(x, y)] = node
-        y += 1
 
     for node in nodes_by_id.values():
         x, y = node.id

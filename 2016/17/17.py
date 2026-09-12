@@ -9,9 +9,9 @@ def get_available_neighbours(
     neighbours = [(x, y - 1, "U"), (x, y + 1, "D"), (x - 1, y, "L"), (x + 1, y, "R")]
     hash_ = hashlib.md5((key + path).encode()).hexdigest()[:4]
     res: list[tuple[int, int, str]] = []
-    for (x, y, dir_), c in zip(neighbours, hash_):
-        if c in "bcdef" and 0 <= x < 4 and 0 <= y < 4:
-            res.append((x, y, path + dir_))
+    for (x_, y_, dir_), c in zip(neighbours, hash_):
+        if c in "bcdef" and 0 <= x_ < 4 and 0 <= y_ < 4:
+            res.append((x_, y_, path + dir_))
     return res
 
 

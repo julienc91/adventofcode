@@ -2,7 +2,7 @@ from collections import Counter
 from collections.abc import Iterator
 from enum import Enum
 from functools import cached_property
-from typing import Self, TypeVar
+from typing import Self
 
 from utils.parsing import parse_input
 
@@ -45,17 +45,14 @@ class HandWithJoker(Hand):
         return HandTypes(tuple(counter))
 
 
-HandKlass = TypeVar("HandKlass", bound=Hand)
-
-
-def parse_hands(hand_klass: type[HandKlass]) -> Iterator[HandKlass]:
+def parse_hands[HandKlass: Hand](hand_klass: type[HandKlass]) -> Iterator[HandKlass]:
     for line in parse_input():
         cards, bid = line.split()
         yield hand_klass(cards, bid=int(bid))
 
 
-def _main(hand_klass: type[HandKlass]) -> int:
-    hands = sorted(list(parse_hands(hand_klass)))
+def _main[HandKlass: Hand](hand_klass: type[HandKlass]) -> int:
+    hands = sorted(parse_hands(hand_klass))
     return sum(hand.bid * rank for rank, hand in enumerate(hands, start=1))
 
 

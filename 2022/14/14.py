@@ -70,7 +70,7 @@ def print_grid(grid: dict[tuple[int, int], State]) -> None:
     for y in range(ymin, ymax + 2):
         for x in range(xmin - 2, xmax + 2):
             print(grid[(x, y)].value, end="")
-        print("", end="\n")
+        print()
     print()
 
 

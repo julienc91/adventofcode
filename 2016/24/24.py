@@ -11,14 +11,12 @@ def parse_map() -> tuple[frozenset[Point], list[Point]]:
     res: set[Point] = set()
     targets: dict[int, Point] = {}
 
-    y = 0
-    for line in parse_input():
+    for y, line in enumerate(parse_input()):
         for x, c in enumerate(line):
             if c != "#":
                 res.add((x, y))
             if c.isdigit():
                 targets[int(c)] = (x, y)
-        y += 1
     return frozenset(res), [targets[i] for i in range(len(targets))]
 
 

@@ -16,7 +16,7 @@ def puzzle() -> None:
 
 
 def validate_date(day: int | None, year: int | None) -> date:
-    today = date.today()
+    today = date.today()  # noqa: DTZ011
 
     if year is None:
         year = today.year

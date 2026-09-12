@@ -2,13 +2,10 @@ import json
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from pathlib import Path
-from typing import TypeVar
-
-T = TypeVar("T")
 
 
 @contextmanager
-def pre_compute(
+def pre_compute[T](
     builder: Callable[[], T], year: int, puzzle_id: int, cache_id: str = ""
 ) -> Iterator[T]:
     cache_directory = Path(f"{year}") / Path(f"{puzzle_id:02d}")

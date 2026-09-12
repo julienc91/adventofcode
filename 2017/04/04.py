@@ -25,7 +25,7 @@ def main2() -> int:
         return (
             len(words)
             == len(set(words))
-            == len(set("".join(sorted(word)) for word in words))
+            == len({"".join(sorted(word)) for word in words})
         )
 
     return _main(is_valid)

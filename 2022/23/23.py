@@ -12,12 +12,10 @@ class Direction(Enum):
 
 def parse_locations() -> set[tuple[int, int]]:
     elves_locations: set[tuple[int, int]] = set()
-    y = 0
-    for line in parse_input():
+    for y, line in enumerate(parse_input()):
         for x, c in enumerate(line):
             if c == "#":
                 elves_locations.add((x, y))
-        y += 1
     return elves_locations
 
 
@@ -91,12 +89,11 @@ def _main(nb_turns: int | None) -> tuple[int, int]:
                 break
 
         has_moved_at_least_one = False
-        for x, y in proposed_moves:
+        for (x, y), (previous_x, previous_y) in proposed_moves.items():
             if (x, y) in denied_moves:
                 continue
 
             has_moved_at_least_one = True
-            previous_x, previous_y = proposed_moves[(x, y)]
             locations.remove((previous_x, previous_y))
             locations.add((x, y))
 
@@ -113,7 +110,7 @@ def _main(nb_turns: int | None) -> tuple[int, int]:
 
 
 def main1() -> int:
-    turn, count = _main(10)
+    _, count = _main(10)
     return count
 
 

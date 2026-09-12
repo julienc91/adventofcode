@@ -83,6 +83,6 @@ def main2() -> int:
 
     value = data["root"]
     assert not isinstance(value, int)
-    left, right, operator = value
+    left, right, _ = value
     data["root"] = (left, right, "-")
     return solve("root", data, 0)

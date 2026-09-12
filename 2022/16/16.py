@@ -144,6 +144,5 @@ def main2() -> int:
             if not path1.isdisjoint(path2):
                 # The paths are overlapping, this cannot be a valid solution
                 continue
-            if score1 + score2 > best_score:
-                best_score = score1 + score2
+            best_score = max(best_score, score1 + score2)
     return best_score

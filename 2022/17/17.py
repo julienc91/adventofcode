@@ -2,30 +2,33 @@ import itertools
 from collections import defaultdict
 from collections.abc import Iterator
 from enum import Enum
+from typing import ClassVar
+
+type Pixels = list[tuple[int, int]]
 
 
 class AbstractPiece:
-    pixels: list[tuple[int, int]]
+    pixels: ClassVar[Pixels]
 
 
 class HorizontalBar(AbstractPiece):
-    pixels = [(0, 0), (1, 0), (2, 0), (3, 0)]
+    pixels: ClassVar[Pixels] = [(0, 0), (1, 0), (2, 0), (3, 0)]
 
 
 class Cross(AbstractPiece):
-    pixels = [(1, 0), (0, 1), (1, 1), (2, 1), (1, 2)]
+    pixels: ClassVar[Pixels] = [(1, 0), (0, 1), (1, 1), (2, 1), (1, 2)]
 
 
 class ReverseL(AbstractPiece):
-    pixels = [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]
+    pixels: ClassVar[Pixels] = [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]
 
 
 class VerticalBar(AbstractPiece):
-    pixels = [(0, 0), (0, 1), (0, 2), (0, 3)]
+    pixels: ClassVar[Pixels] = [(0, 0), (0, 1), (0, 2), (0, 3)]
 
 
 class Square(AbstractPiece):
-    pixels = [(0, 0), (1, 0), (0, 1), (1, 1)]
+    pixels: ClassVar[Pixels] = [(0, 0), (1, 0), (0, 1), (1, 1)]
 
 
 class JetPattern(Enum):
@@ -122,7 +125,6 @@ def get_loop_details(cycle_heights: list[int]) -> tuple[int, int]:
 def get_offset_details(
     cycle_heights: list[int], loop_length: int, loop_height: int
 ) -> tuple[int, int]:
-    cycle_heights = cycle_heights
     offset = 0
     while True:
         current_loop_height = sum(cycle_heights[offset : offset + loop_length])

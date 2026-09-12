@@ -22,9 +22,7 @@ def find_mirror_position(grid: list[str], smudge: bool) -> int | None:
                 continue
 
             if grid[y - i - 1] != grid[y + i]:
-                if not allow_error:
-                    break
-                elif count_diffs(grid[y - i - 1], grid[y + i]) > 1:
+                if not allow_error or count_diffs(grid[y - i - 1], grid[y + i]) > 1:
                     break
                 allow_error = False
         else:

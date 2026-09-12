@@ -8,12 +8,12 @@ def _main(nb_days: int) -> int:
 
     for day in range(nb_days):
         new_data: dict[int, int] = defaultdict(int)
-        for nb_days, nb_fish in data.items():
-            if nb_days == 0:
+        for days, nb_fish in data.items():
+            if days == 0:
                 new_data[8] += nb_fish
                 new_data[6] += nb_fish
             else:
-                new_data[nb_days - 1] += nb_fish
+                new_data[days - 1] += nb_fish
         data = new_data
     return sum(data.values())
 

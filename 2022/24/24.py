@@ -65,7 +65,7 @@ class Grid:
                 return count
 
             count += 1
-            blizzards_this_step, denied_positions = self._get_step_n(count)
+            _blizzards_this_step, denied_positions = self._get_step_n(count)
 
             for x2, y2 in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1), (x, y)]:
                 if (

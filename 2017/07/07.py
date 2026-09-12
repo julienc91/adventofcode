@@ -7,8 +7,8 @@ class Node:
     def __init__(self, name: str) -> None:
         self.name = name
         self.weight: int = 0
-        self.parent: "Node | None" = None
-        self.children: list["Node"] = []
+        self.parent: Node | None = None
+        self.children: list[Node] = []
 
     def add_child(self, node: "Node") -> None:
         self.children.append(node)

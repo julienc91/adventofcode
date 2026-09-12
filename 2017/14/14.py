@@ -18,7 +18,7 @@ def dense_hash(data: list[int]) -> str:
     result = ""
     for i in range(0, data_size, block_size):
         block_reduction: int = reduce(lambda a, b: a ^ b, data[i : i + block_size])  # type: ignore
-        result += "{:02x}".format(block_reduction)
+        result += f"{block_reduction:02x}"
     return result
 
 
@@ -49,7 +49,7 @@ def get_grid(key: str) -> list[str]:
     for i in range(grid_height):
         hash_input = f"{key}-{i}"
         hash_output = hash_knot(hash_input)
-        result.append("".join("{:04b}".format(int(c, 16)) for c in hash_output))
+        result.append("".join(f"{int(c, 16):04b}" for c in hash_output))
     return result
 
 

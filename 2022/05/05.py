@@ -10,9 +10,7 @@ def parse_stacks() -> list[list[str]]:
     while line := input().rstrip():
         for i in range(1, nb_stacks * stack_input_length, stack_input_length):
             char = line[i]
-            if char == " ":
-                continue
-            elif char.isdigit():
+            if char == " " or char.isdigit():
                 continue
             else:
                 stacks[i // stack_input_length].append(char)

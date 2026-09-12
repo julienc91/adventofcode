@@ -50,7 +50,7 @@ def main1() -> int:
 def main2() -> int:
     data = list(parse_input(int))
     decryption_key = 811589153
-    data = list(map(lambda n: n * decryption_key, data))
+    data = [n * decryption_key for n in data]
 
     mixer = Mixer(data)
     mix_result = mixer.mix(10)

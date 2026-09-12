@@ -2,7 +2,7 @@
 name = "adventofcode"
 version = "0.1.0"
 description = ""
-authors = ["Julien Chaumont"]
+authors = [{ name = "Julien Chaumont"}]
 requires-python = ">=3.13"
 
 dependencies = [
@@ -27,4 +27,4 @@ reportIncompatibleMethodOverride = false
 addopts = "--benchmark-skip"
 
 [tool.ruff.lint]
-extend-select = ["I"]
+extend-ignore = ["B019"]

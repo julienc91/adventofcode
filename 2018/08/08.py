@@ -3,8 +3,8 @@ from collections.abc import Iterator
 
 class Node:
     def __init__(self):
-        self.parent: "Node | None" = None
-        self.children: list["Node"] = []
+        self.parent: Node | None = None
+        self.children: list[Node] = []
         self.metadata: list[int] = []
 
     @property

@@ -115,4 +115,4 @@ def main2():
 
     # Translate back to the original coordinates
     rock = Hailstone(rock.coordinates + h0.coordinates, rock.velocity + h0.velocity)
-    return int(round(rock.coordinates.x + rock.coordinates.y + rock.coordinates.z))
+    return round(rock.coordinates.x + rock.coordinates.y + rock.coordinates.z)

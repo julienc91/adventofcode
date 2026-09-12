@@ -21,7 +21,7 @@ def parse_grid() -> tuple[dict[str, list[tuple[int, int]]], tuple[int, int]]:
 def main1() -> int:
     antinode_locations = set()
     grid, (w, h) = parse_grid()
-    for frequency, antennas in grid.items():
+    for antennas in grid.values():
         for (x1, y1), (x2, y2) in itertools.combinations(antennas, 2):
             candidates = [
                 (x1 - (x2 - x1), y1 - (y2 - y1)),
@@ -37,7 +37,7 @@ def main1() -> int:
 def main2() -> int:
     antinode_locations = set()
     grid, (w, h) = parse_grid()
-    for frequency, antennas in grid.items():
+    for antennas in grid.values():
         for (x1, y1), (x2, y2) in itertools.combinations(antennas, 2):
             antinode_locations |= {(x1, y1), (x2, y2)}
             slope = Fraction(x2 - x1, y2 - y1)

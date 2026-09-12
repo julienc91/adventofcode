@@ -6,7 +6,7 @@ HikingTrail = tuple[tuple[int, int], ...]
 
 
 def parse_map() -> list[list[int]]:
-    return list(list(map(int, line)) for line in parse_input())
+    return [[int(item) for item in line] for line in parse_input()]
 
 
 def get_hiking_trails(grid: list[list[int]], x: int, y: int) -> set[HikingTrail]:

@@ -64,10 +64,8 @@ def restrict_area(cuboid: Cuboid, max_area: int) -> Cuboid | None:
     def restrict_range(v0: int, v1: int) -> tuple[int, int] | None:
         if v0 > max_area or v1 < -max_area:
             return None
-        if v0 < -max_area:
-            v0 = -max_area
-        if v1 > max_area:
-            v1 = max_area
+        v0 = max(v0, -max_area)
+        v1 = min(v1, max_area)
         return v0, v1
 
     x_range = restrict_range(x0, x1)

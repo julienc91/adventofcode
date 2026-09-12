@@ -60,7 +60,7 @@ class UltraCrucible(Crucible):
 
 
 def _main(crucible_klass: type[Crucible]) -> int:
-    grid = list(list(map(int, line)) for line in parse_input())
+    grid = [list(map(int, line)) for line in parse_input()]
     end = (len(grid[-1]) - 1, len(grid) - 1)
 
     def get_neighbours(state: State, distance: int) -> Iterator[tuple[int, State]]:
@@ -78,8 +78,9 @@ def _main(crucible_klass: type[Crucible]) -> int:
         State((0, 0), Direction.RIGHT, 0),
         get_neighbours=get_neighbours,
         is_over=(
-            lambda state: state.position == end
-            and crucible_klass.can_be_final_state(state)
+            lambda state: (
+                state.position == end and crucible_klass.can_be_final_state(state)
+            )
         ),
     )
     return weight

@@ -29,9 +29,8 @@ def is_nice_v2(string: str) -> bool:
                 if pair in string[i + 2 :]:
                     has_repeated_pair = True
 
-            if not has_repeater_letter:
-                if string[i] == string[i + 2]:
-                    has_repeater_letter = True
+            if not has_repeater_letter and string[i] == string[i + 2]:
+                has_repeater_letter = True
         except IndexError:
             return False
 

@@ -89,13 +89,10 @@ class State:
         if self.robots[robot_type] >= blueprint_limits[robot_type]:
             return False
 
-        if (
+        return not (
             self.robots[robot_type] * self.countdown + self.resources[robot_type]
             >= blueprint_limits[robot_type] * self.countdown
-        ):
-            return False
-
-        return True
+        )
 
     def build_robot(self, robot_type: Resource) -> None:
         cost = self.blueprint.costs[robot_type]

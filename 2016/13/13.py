@@ -7,7 +7,7 @@ def is_valid(x: int, y: int, magic_number: int) -> bool:
     if x < 0 or y < 0:
         return False
     res = x * x + 3 * x + 2 * x * y + y + y * y + magic_number
-    return bin(res).count("1") % 2 == 0
+    return res.bit_count() % 2 == 0
 
 
 def get_neighbours(x: int, y: int, magic_number: int) -> list[Point]:

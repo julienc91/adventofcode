@@ -12,8 +12,8 @@ def main1() -> str:
     res = ""
     while steps:
         next_step = min(step for step in steps if len(steps[step]) == 0)
-        for step in steps:
-            steps[step].discard(next_step)
+        for value in steps.values():
+            value.discard(next_step)
         steps.pop(next_step)
         res += next_step
     return res

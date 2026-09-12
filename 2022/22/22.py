@@ -58,7 +58,7 @@ class Grid(AbstractForm):
 
     @classmethod
     def from_input(cls) -> "Grid":
-        grid: "Grid" = Grid()
+        grid: Grid = Grid()
         y = 0
         while line := input().rstrip():
             grid._add_row(y, [State(c) for c in line])

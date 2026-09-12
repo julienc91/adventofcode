@@ -58,7 +58,7 @@ def evaluate(
         score[1] += ingredient.durability * quantity
         score[2] += ingredient.flavor * quantity
         score[3] += ingredient.texture * quantity
-    return math.prod([0 if s <= 0 else s for s in score])
+    return math.prod([max(0, s) for s in score])
 
 
 def iterate(ingredients: list[Ingredient]) -> Iterator[list[tuple[Ingredient, int]]]:

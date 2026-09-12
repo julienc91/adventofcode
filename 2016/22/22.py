@@ -90,9 +90,9 @@ def main2() -> int:
     # ......................................
 
     empty_node = next(node for node in nodes if node.used == 0)
-    leftmost_full_node = sorted(
+    leftmost_full_node = min(
         [node for node in nodes if node.used > 400], key=lambda node: node.x
-    )[0]
+    )
 
     count = (
         empty_node.x - leftmost_full_node.x + 1

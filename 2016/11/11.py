@@ -101,11 +101,9 @@ class Map:
             tuple(m for m in move if isinstance(m, Microship))
             + self.floors[target_floor].microships
         )
-        if not self.validate_combination(
+        return self.validate_combination(
             new_generators_new_floor, new_microships_new_floor
-        ):
-            return False
-        return True
+        )
 
     def make_move(
         self, move: tuple[Generator | Microship, ...], target_floor: int

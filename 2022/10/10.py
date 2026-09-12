@@ -31,9 +31,9 @@ class Processor:
     def display(self) -> None:
         for i, value in enumerate(self.crt):
             if i > 0 and i % self.CRT_WIDTH == 0:
-                print("", end="\n")
+                print()
             print("#" if value else " ", end="")
-        print("", end="\n")
+        print()
 
 
 def main1() -> int:

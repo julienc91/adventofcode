@@ -70,7 +70,7 @@ def simulate_universe(
     elif score_p2 >= 21:
         return 0, 1
 
-    for total_dice in UNIVERSES_FACTOR.keys():
+    for total_dice, value in UNIVERSES_FACTOR.items():
         new_p1_pos = do_step(pos_p1, total_dice) if is_p1_turn else pos_p1
         new_p2_pos = do_step(pos_p2, total_dice) if not is_p1_turn else pos_p2
         new_score_p1 = score_p1 + (new_p1_pos if is_p1_turn else 0)
@@ -83,8 +83,8 @@ def simulate_universe(
             new_p2_pos,
             is_p1_turn=not is_p1_turn,
         )
-        total_universe_p1 += UNIVERSES_FACTOR[total_dice] * res[0]
-        total_universe_p2 += UNIVERSES_FACTOR[total_dice] * res[1]
+        total_universe_p1 += value * res[0]
+        total_universe_p2 += value * res[1]
 
     __cache[(score_p1, score_p2, pos_p1, pos_p2, is_p1_turn)] = (
         total_universe_p1,
