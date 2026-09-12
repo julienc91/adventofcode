@@ -14,10 +14,11 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "pre-commit>=4.6.2",
     "pytest~=9.0.1",
     "pytest-benchmark~=5.2.0",
     "pytest-xdist~=3.8.0",
-    "ty~=0.0.80"
+    "ty~=0.0.80",
 ]
 
 [tool.ty.rules]
