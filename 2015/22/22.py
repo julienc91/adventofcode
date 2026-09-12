@@ -13,7 +13,7 @@ class Spell:
     heal: int = 0
     mana: int = 0
 
-    def clone(self) -> "Spell":
+    def clone(self) -> Spell:
         return replace(self)
 
 
@@ -46,7 +46,7 @@ class GameState:
     def is_winning(self) -> bool:
         return self.boss_hp <= 0 < self.player_hp
 
-    def clone(self) -> "GameState":
+    def clone(self) -> GameState:
         clone = replace(self)
         clone.active_spells = tuple(spell.clone() for spell in clone.active_spells)
         return clone

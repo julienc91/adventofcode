@@ -10,7 +10,7 @@ class Node:
         self.parent: Node | None = None
         self.children: list[Node] = []
 
-    def add_child(self, node: "Node") -> None:
+    def add_child(self, node: Node) -> None:
         self.children.append(node)
         node.parent = self
 

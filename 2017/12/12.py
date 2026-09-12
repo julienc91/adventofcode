@@ -6,7 +6,7 @@ from utils.parsing import parse_input
 @dataclass
 class Program:
     id: int
-    direct_links: list["Program"]
+    direct_links: list[Program]
 
 
 def parse_programs() -> dict[int, Program]:

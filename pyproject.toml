@@ -3,7 +3,7 @@ name = "adventofcode"
 version = "0.1.0"
 description = ""
 authors = [{ name = "Julien Chaumont"}]
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 
 dependencies = [
     "appdirs~=1.4.4",

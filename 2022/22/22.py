@@ -16,7 +16,7 @@ class Direction(Enum):
     BOTTOM = "v"
     LEFT = "<"
 
-    def turn(self, turn: str) -> "Direction":
+    def turn(self, turn: str) -> Direction:
         directions = list(Direction)
         if turn == "R":
             return directions[(directions.index(self) + 1) % len(directions)]
@@ -25,7 +25,7 @@ class Direction(Enum):
         raise ValueError(turn)
 
     @property
-    def opposite(self) -> "Direction":
+    def opposite(self) -> Direction:
         directions = list(Direction)
         return directions[(directions.index(self) + 2) % len(directions)]
 
@@ -41,7 +41,7 @@ class Direction(Enum):
 
 class AbstractForm:
     @classmethod
-    def from_input(cls) -> "AbstractForm":
+    def from_input(cls) -> AbstractForm:
         raise NotImplementedError
 
     def apply_instructions(self, instructions: str) -> int:
@@ -57,7 +57,7 @@ class Grid(AbstractForm):
         self.left_bounds: dict[int, int] = {}
 
     @classmethod
-    def from_input(cls) -> "Grid":
+    def from_input(cls) -> Grid:
         grid: Grid = Grid()
         y = 0
         while line := input().rstrip():
@@ -141,7 +141,7 @@ class Cube(AbstractForm):
         self.grid: dict[tuple[int, int], State] = defaultdict(lambda: State.VOID)
 
     @classmethod
-    def from_input(cls) -> "Cube":
+    def from_input(cls) -> Cube:
         cube = Cube()
         y = 0
         while line := input().rstrip():

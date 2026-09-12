@@ -20,7 +20,7 @@ class Packet:
     version: int
     type: PacketTypes
     litteral_value: int
-    subpackets: list["Packet"]
+    subpackets: list[Packet]
 
     @property
     def value(self) -> int:

@@ -22,7 +22,7 @@ class Bot:
     def set_instruction(self, lower_output: str, higher_output: str) -> None:
         self.instruction = (lower_output, higher_output)
 
-    def execute_instruction(self, all_bots: dict[str, "Bot"]) -> None:
+    def execute_instruction(self, all_bots: dict[str, Bot]) -> None:
         lower_value, high_value = sorted(self.chips)
         all_bots[self.instruction[0]].receive_value(lower_value)
         all_bots[self.instruction[1]].receive_value(high_value)

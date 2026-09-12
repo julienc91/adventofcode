@@ -11,7 +11,7 @@ from utils.parsing import parse_input
 class Generator:
     name: str
 
-    def is_microship_available(self, floor: "Floor") -> bool:
+    def is_microship_available(self, floor: Floor) -> bool:
         return any(microship.name == self.name for microship in floor.microships)
 
 
@@ -107,7 +107,7 @@ class Map:
 
     def make_move(
         self, move: tuple[Generator | Microship, ...], target_floor: int
-    ) -> "Map":
+    ) -> Map:
         new_map = Map()
         for floor in self.floors:
             new_floor = Floor(floor.number)

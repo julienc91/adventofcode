@@ -11,19 +11,19 @@ class Coordinates:
     y: float
     z: float
 
-    def __add__(self, other: "Coordinates") -> "Coordinates":
+    def __add__(self, other: Coordinates) -> Coordinates:
         return Coordinates(self.x + other.x, self.y + other.y, self.z + other.z)
 
-    def __sub__(self, other: "Coordinates") -> "Coordinates":
+    def __sub__(self, other: Coordinates) -> Coordinates:
         return Coordinates(self.x - other.x, self.y - other.y, self.z - other.z)
 
-    def __neg__(self) -> "Coordinates":
+    def __neg__(self) -> Coordinates:
         return Coordinates(-self.x, -self.y, -self.z)
 
-    def __mul__(self, other: float) -> "Coordinates":
+    def __mul__(self, other: float) -> Coordinates:
         return Coordinates(self.x * other, self.y * other, self.z * other)
 
-    def __truediv__(self, other: float) -> "Coordinates":
+    def __truediv__(self, other: float) -> Coordinates:
         return Coordinates(self.x / other, self.y / other, self.z / other)
 
 

@@ -15,7 +15,7 @@ class AOCClient:
     CACHE_FILE = CACHE_DIRECTORY / "cookie.txt"
 
     @property
-    def puzzle(self) -> "Puzzle":
+    def puzzle(self) -> Puzzle:
         return Puzzle(self)
 
     @property

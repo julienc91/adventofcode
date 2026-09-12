@@ -8,7 +8,7 @@ from utils.parsing import parse_input
 @dataclass
 class Node:
     name: str
-    neighbours: list[tuple["Node", int]]
+    neighbours: list[tuple[Node, int]]
 
     def __repr__(self) -> str:
         return self.name

@@ -5,7 +5,7 @@ if TYPE_CHECKING:
 
 
 class Puzzle:
-    def __init__(self, client: "AOCClient") -> None:
+    def __init__(self, client: AOCClient) -> None:
         self._client = client
 
     def get_input(self, year: int, day: int) -> str:

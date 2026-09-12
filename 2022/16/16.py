@@ -10,7 +10,7 @@ from utils.parsing import parse_input
 class Valve:
     name: str
     flow_rate: int
-    links: set["Valve"] = field(default_factory=set)
+    links: set[Valve] = field(default_factory=set)
 
     def __hash__(self) -> int:
         return hash(self.name)

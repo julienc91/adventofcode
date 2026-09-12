@@ -16,7 +16,7 @@ class Monkey:
     throw_targets: tuple[int, int]
     with_worry_relief: bool
 
-    monkeys_by_id: list["Monkey"] | None = None
+    monkeys_by_id: list[Monkey] | None = None
     common_factor: int = 0
     count_inspections: int = 0
 

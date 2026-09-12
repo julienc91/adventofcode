@@ -13,14 +13,14 @@ class Shape(Enum):
         return self.value + 1
 
     @property
-    def wins_against(self) -> "Shape":
+    def wins_against(self) -> Shape:
         return Shape((self.value - 1) % 3)  # Props to @Atlante45!
 
     @property
-    def loses_against(self) -> "Shape":
+    def loses_against(self) -> Shape:
         return Shape((self.value + 1) % 3)
 
-    def is_winner(self, opponent: "Shape") -> bool:
+    def is_winner(self, opponent: Shape) -> bool:
         return self.wins_against == opponent
 
 
@@ -37,13 +37,13 @@ class AbstractGame:
         return score
 
     @staticmethod
-    def get_shapes(player: str, opponent: str) -> tuple["Shape", "Shape"]:
+    def get_shapes(player: str, opponent: str) -> tuple[Shape, Shape]:
         raise NotImplementedError
 
 
 class Game1(AbstractGame):
     @staticmethod
-    def get_shapes(player: str, opponent: str) -> tuple["Shape", "Shape"]:
+    def get_shapes(player: str, opponent: str) -> tuple[Shape, Shape]:
         opponent_shape = {"A": Shape.ROCK, "B": Shape.PAPER, "C": Shape.SCISSORS}[
             opponent
         ]
@@ -53,7 +53,7 @@ class Game1(AbstractGame):
 
 class Game2(AbstractGame):
     @staticmethod
-    def get_shapes(player: str, opponent: str) -> tuple["Shape", "Shape"]:
+    def get_shapes(player: str, opponent: str) -> tuple[Shape, Shape]:
         opponent_shape = {"A": Shape.ROCK, "B": Shape.PAPER, "C": Shape.SCISSORS}[
             opponent
         ]

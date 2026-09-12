@@ -10,7 +10,7 @@ class Node:
     x: int
     y: int
     weight: int
-    links: set["Node"]
+    links: set[Node]
 
     def __hash__(self) -> int:
         return hash((self.x, self.y))
@@ -18,7 +18,7 @@ class Node:
     def __repr__(self) -> str:
         return f"({self.x}, {self.y}): {self.weight}"
 
-    def __lt__(self, other: "Node") -> bool:
+    def __lt__(self, other: Node) -> bool:
         return self.x < other.x or (self.x == other.x and self.y < other.y)
 
 

@@ -54,7 +54,7 @@ class Character:
         self.damage += sum(ring.damage for ring in rings)
         self.armor += sum(ring.armor for ring in rings)
 
-    def attack(self, character: "Character") -> None:
+    def attack(self, character: Character) -> None:
         character.hp -= max(1, self.damage - character.armor)
 
 

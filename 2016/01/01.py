@@ -8,16 +8,16 @@ class Direction(Enum):
     SOUTH = (0, -1)
     WEST = (-1, 0)
 
-    def turn_right(self) -> "Direction":
+    def turn_right(self) -> Direction:
         x, y = self.value
         return Direction((y, -x))
 
-    def turn_left(self) -> "Direction":
+    def turn_left(self) -> Direction:
         x, y = self.value
         return Direction((-y, x))
 
 
-def parse_instructions() -> Iterator[tuple["Direction", int]]:
+def parse_instructions() -> Iterator[tuple[Direction, int]]:
     instructions = input().strip().split(", ")
     direction = Direction.NORTH
     for instruction in instructions:

@@ -7,7 +7,7 @@ from utils.parsing import parse_input
 class Node:
     id: tuple[int, int]
     level: int
-    links: list["Node"] = field(default_factory=list)
+    links: list[Node] = field(default_factory=list)
 
 
 def parse_data() -> tuple[

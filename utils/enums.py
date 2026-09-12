@@ -8,7 +8,7 @@ class Direction(StrEnum):
     LEFT = "left"
 
     @property
-    def opposite(self) -> "Direction":
+    def opposite(self) -> Direction:
         if self == Direction.TOP:
             return Direction.BOTTOM
         elif self == Direction.RIGHT:
@@ -28,7 +28,7 @@ class Direction(StrEnum):
         else:
             return x - steps, y
 
-    def turn_right(self) -> "Direction":
+    def turn_right(self) -> Direction:
         if self == Direction.TOP:
             return Direction.RIGHT
         elif self == Direction.RIGHT:
@@ -38,7 +38,7 @@ class Direction(StrEnum):
         else:
             return Direction.TOP
 
-    def turn_left(self) -> "Direction":
+    def turn_left(self) -> Direction:
         if self == Direction.TOP:
             return Direction.LEFT
         elif self == Direction.RIGHT:

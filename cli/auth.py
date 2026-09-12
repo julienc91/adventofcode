@@ -15,7 +15,7 @@ def auth() -> None:
 def check() -> None:
     try:
         _ = aoc_client.check_auth()
-    except (AuthenticationException, NotLoggedInException):
+    except AuthenticationException, NotLoggedInException:
         raise click.ClickException("Authentication failed")
     click.echo("Authentication successful")
 

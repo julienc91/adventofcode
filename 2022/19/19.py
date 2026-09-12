@@ -124,7 +124,7 @@ class State:
                 states_to_try.add(resource)
         return states_to_try
 
-    def build_next_state(self, build_type: Resource | None) -> "State":
+    def build_next_state(self, build_type: Resource | None) -> State:
         next_state = State(
             countdown=self.countdown - 1,
             blueprint=self.blueprint,

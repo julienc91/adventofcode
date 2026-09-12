@@ -19,8 +19,8 @@ class Brick:
     z2: int
 
     floating: bool = True
-    supported_by: set["Brick"] = field(default_factory=set)
-    supporting: set["Brick"] = field(default_factory=set)
+    supported_by: set[Brick] = field(default_factory=set)
+    supporting: set[Brick] = field(default_factory=set)
 
     def __hash__(self):
         return hash(("brick", self.id))
