@@ -1,6 +1,6 @@
 import itertools
 from collections import defaultdict
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 from enum import Enum
 from typing import ClassVar
 
@@ -49,7 +49,9 @@ class Game:
     start_y_offset = 3
 
     def __init__(
-        self, pieces: list[type[AbstractPiece]], jet_patterns: list[JetPattern]
+        self,
+        pieces: Sequence[type[AbstractPiece]],
+        jet_patterns: Sequence[JetPattern],
     ) -> None:
         self.pieces = itertools.cycle(pieces)
         self.jet_patterns = itertools.cycle(jet_patterns)

@@ -58,5 +58,5 @@ jobs:
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
           uv sync
-      - name: Run pyright
-        run: uv run pyright
+      - name: Run ty
+        run: uv run ty check

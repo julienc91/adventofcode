@@ -29,7 +29,7 @@ def main1() -> int:
     start, steps, states = parse_input()
 
     state = start
-    tape = {}
+    tape: dict[int, int] = {}
     cursor = 0
     while steps > 0:
         value = tape.get(cursor, 0)

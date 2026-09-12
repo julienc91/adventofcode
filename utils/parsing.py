@@ -1,7 +1,12 @@
 from collections.abc import Iterator
+from typing import overload
 
 
-def parse_input[T: type[int, str]](type_: type[T] = str) -> Iterator[T]:
+@overload
+def parse_input(type_: type[str] = str) -> Iterator[str]: ...
+@overload
+def parse_input[T: (int, str)](type_: type[T]) -> Iterator[T]: ...
+def parse_input(type_=str):
     try:
         while True:
             yield type_(input())

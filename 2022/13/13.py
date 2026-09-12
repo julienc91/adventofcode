@@ -2,7 +2,7 @@ import math
 from ast import literal_eval
 from functools import cmp_to_key
 
-Packet = int | list[int | list["Packet"]]
+type Packet = int | list[Packet]
 
 
 def parse_input() -> list[tuple[Packet, Packet]]:

@@ -17,7 +17,7 @@ def dense_hash(data: list[int]) -> str:
     block_size = 16
     result = ""
     for i in range(0, data_size, block_size):
-        block_reduction: int = reduce(lambda a, b: a ^ b, data[i : i + block_size])  # type: ignore
+        block_reduction: int = reduce(lambda a, b: a ^ b, data[i : i + block_size])
         result += f"{block_reduction:02x}"
     return result
 
